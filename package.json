@@ -1,0 +1,22 @@
+{
+  "name": "sihreportsystem",
+  "version": "1.0.0",
+  "description": "Civic lssue Reporting and Resolution System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SayanDcodeR/SIHReportSystem.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SayanDcodeR/SIHReportSystem/issues"
+  },
+  "homepage": "https://github.com/SayanDcodeR/SIHReportSystem#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
