@@ -80,7 +80,7 @@ body {
 
 /* Stats Section */
 .stats-section {
-    background-color: white;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: 3rem 0;
     margin: 2rem 0;
 }
