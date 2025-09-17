@@ -39,6 +39,9 @@ app.get("/report",(req,res)=>{
 });
 app.get("/about",(req,res)=>{
   res.render("about.ejs");
+});
+app.get("/issues",(req,res)=>{
+  res.render("issues.ejs");
 })
 // app.get("/issues",(req,res)=>{
 //   res.
