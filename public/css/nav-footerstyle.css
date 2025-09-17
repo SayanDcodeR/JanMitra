@@ -67,24 +67,24 @@ body {
   border: 2px solid var(--accent-green);
 }
 
-/* ✅ Footer */
-.nav-footer {
+/* ✅ Footer (unchanged class names) */
+.footer {
   background-color: var(--dark-green);
   color: white;
   padding: 2rem 0;
 }
-.nav-footer h5 {
+.footer h5 {
   font-weight: bold;
   margin-bottom: 1rem;
 }
-.nav-footer a {
+.footer a {
   color: #f1f1f1;
   text-decoration: none;
 }
-.nav-footer a:hover {
+.footer a:hover {
   color: var(--deep-blue);
 }
-.nav-footer-divider {
+.footer-divider {
   border-top: 1px solid var(--neutral-gray);
   margin: 1.5rem 0;
 }
