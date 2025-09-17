@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Civic Issues</title>
+  <link rel="stylesheet" href="../css/issues.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+   <!-- Page Heading -->
+  <header class="page-header">
+    <h1>Civic Issues Dashboard</h1>
+    <p>Track, prioritize, and resolve community problems.</p>
+  </header>
+  <!-- Filter Section -->
+  <section class="filters">
+    <input type="text" class="search-bar" placeholder="Search issues by title, description, or location..."/>
+    <div class="filter-controls">
+      <select>
+        <option>All Categories</option>
+        <option>Garbage</option>
+        <option>Pothole</option>
+        <option>Streetlight</option>
+        <option>Waterlogging</option>
+      </select>
+
+      <select>
+        <option>All Zones</option>
+        <option>North Zone</option>
+        <option>South Zone</option>
+        <option>East Zone</option>
+        <option>West Zone</option>
+      </select>
+
+      <select>
+        <option>All Status</option>
+        <option>Pending</option>
+        <option>In Progress</option>
+        <option>Resolved</option>
+      </select>
+
+      <select>
+        <option>All Priority</option>
+        <option>High</option>
+        <option>Medium</option>
+        <option>Low</option>
+      </select>
+
+      <select>
+        <option>Latest</option>
+        <option>Oldest</option>
+      </select>
+      <button class="reset-btn">Reset</button>
+    </div>
+  </section>
+
+  <!-- Issues Grid -->
+  <section class="issues-grid">
+    <div class="issue-card" data-id="ISSUE-001">
+        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
+        <div class="issue-content">
+            <div class="issue-meta">
+            <span class="status pending">Pending</span>
+            <span class="priority high">High</span>
+            <span class="issue-date">15 Sep 2025</span>
+            </div>
+
+            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
+
+            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
+            <p><strong>Issue ID:</strong> ISSUE-001</p>
+            <p><strong>Reported by:</strong> Anushka Sharma</p>
+            <div class="issue-actions">
+                <div class="action">
+                    <i class="fas fa-thumbs-up"></i> <span>12</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-thumbs-down"></i> <span>2</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-comment"></i> <span>5</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="issue-card" data-id="ISSUE-002">
+        <img src="../images/pothole.jpeg" alt="Issue Image" class="issue-image" />
+        <div class="issue-content">
+            <div class="issue-meta">
+            <span class="status progress">In Progress</span>
+            <span class="priority medium">Medium</span>
+            <span class="issue-date">20 Aug 2025</span>
+            </div>
+
+            <h3 class="issue-title">Pothole near MG Road Bus Stop</h3>
+
+            <p><strong>Location:</strong> MG Road, Delhi</p>
+            <p><strong>Issue ID:</strong> ISSUE-002</p>
+            <p><strong>Reported by:</strong> Sayan Singha</p>
+            <div class="issue-actions">
+                <div class="action">
+                    <i class="fas fa-thumbs-up"></i> <span>6</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-thumbs-down"></i> <span>0</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-comment"></i> <span>0</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="issue-card" data-id="ISSUE-003">
+        <img src="../images/waterlog.jpeg" alt="Issue Image" class="issue-image" />
+        <div class="issue-content">
+            <div class="issue-meta">
+            <span class="status resolved">Resolved</span>
+            <span class="priority high">High</span>
+            <span class="issue-date">20 Aug 2025</span>
+            </div>
+
+            <h3 class="issue-title">Waterlogging after Heavy Rainfall</h3>
+
+            <p><strong>Location:</strong> MG Road, Delhi</p>
+            <p><strong>Issue ID:</strong> ISSUE-003</p>
+            <p><strong>Reported by:</strong> Ayan Dutta</p>
+            <div class="issue-actions">
+                <div class="action">
+                    <i class="fas fa-thumbs-up"></i> <span>6</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-thumbs-down"></i> <span>0</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-comment"></i> <span>0</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </section>
+
+</body>
+</html>
