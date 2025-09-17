@@ -37,6 +37,9 @@ app.get("/home",(req,res)=>{
 app.get("/report",(req,res)=>{
   res.render("report.ejs");
 });
+app.get("/about",(req,res)=>{
+  res.render("about.ejs");
+})
 // app.get("/issues",(req,res)=>{
 //   res.
 // })
