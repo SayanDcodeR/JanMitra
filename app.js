@@ -9,12 +9,23 @@ const ejsMate = require("ejs-mate");
 const session=require("express-session");
 const flash=require("connect-flash");
 const multer = require('multer');
+const Issue=require("./models/issues");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
+async function main() {
+  await mongoose.connect(MONGO_URL);
+}
+main()
+  .then(() => {
+    console.log("Connected to DB");
+  })
+  .catch((err) => {
+    console.log("Error in connecting DB");
+  });
 
 
 
@@ -40,8 +51,17 @@ app.get("/report",(req,res)=>{
 app.get("/about",(req,res)=>{
   res.render("about.ejs");
 });
-app.get("/issues",(req,res)=>{
-  res.render("issues.ejs");
+app.get("/issues",async(req,res)=>{
+  const allIssues=await Issue.find({});
+  res.render("issues.ejs",{allIssues})
+});
+app.post("/report",async(req,res)=>{
+  console.log(req.body.issue);
+  const newIssue= new Issue(req.body.issue);
+  newIssue.image="https://cdn.shopify.com/s/files/1/0274/7288/7913/files/MicrosoftTeams-image_32.jpg?v=1705315718";
+  await newIssue.save();
+  const allIssues=await Issue.find({});
+  res.redirect("/issues");
 })
 // app.get("/issues",(req,res)=>{
 //   res.

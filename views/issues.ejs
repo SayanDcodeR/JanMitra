@@ -51,7 +51,7 @@
 
   <!-- Issues Grid -->
   <section class="issues-grid">
-    <div class="issue-card" data-id="ISSUE-001">
+    <!-- <div class="issue-card" data-id="ISSUE-001">
         <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
         <div class="issue-content">
             <div class="issue-meta">
@@ -137,6 +137,204 @@
 
         </div>
     </div>
+    <div class="issue-card" data-id="ISSUE-001">
+        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
+        <div class="issue-content">
+            <div class="issue-meta">
+            <span class="status pending">Pending</span>
+            <span class="priority high">High</span>
+            <span class="issue-date">15 Sep 2025</span>
+            </div>
+
+            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
+
+            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
+            <p><strong>Issue ID:</strong> ISSUE-001</p>
+            <p><strong>Reported by:</strong> Anushka Sharma</p>
+            <div class="issue-actions">
+                <div class="action">
+                    <i class="fas fa-thumbs-up"></i> <span>12</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-thumbs-down"></i> <span>2</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-comment"></i> <span>5</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="issue-card" data-id="ISSUE-001">
+        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
+        <div class="issue-content">
+            <div class="issue-meta">
+            <span class="status pending">Pending</span>
+            <span class="priority high">High</span>
+            <span class="issue-date">15 Sep 2025</span>
+            </div>
+
+            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
+
+            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
+            <p><strong>Issue ID:</strong> ISSUE-001</p>
+            <p><strong>Reported by:</strong> Anushka Sharma</p>
+            <div class="issue-actions">
+                <div class="action">
+                    <i class="fas fa-thumbs-up"></i> <span>12</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-thumbs-down"></i> <span>2</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-comment"></i> <span>5</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="issue-card" data-id="ISSUE-001">
+        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
+        <div class="issue-content">
+            <div class="issue-meta">
+            <span class="status pending">Pending</span>
+            <span class="priority high">High</span>
+            <span class="issue-date">15 Sep 2025</span>
+            </div>
+
+            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
+
+            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
+            <p><strong>Issue ID:</strong> ISSUE-001</p>
+            <p><strong>Reported by:</strong> Anushka Sharma</p>
+            <div class="issue-actions">
+                <div class="action">
+                    <i class="fas fa-thumbs-up"></i> <span>12</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-thumbs-down"></i> <span>2</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-comment"></i> <span>5</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="issue-card" data-id="ISSUE-001">
+        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
+        <div class="issue-content">
+            <div class="issue-meta">
+            <span class="status pending">Pending</span>
+            <span class="priority high">High</span>
+            <span class="issue-date">15 Sep 2025</span>
+            </div>
+
+            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
+
+            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
+            <p><strong>Issue ID:</strong> ISSUE-001</p>
+            <p><strong>Reported by:</strong> Anushka Sharma</p>
+            <div class="issue-actions">
+                <div class="action">
+                    <i class="fas fa-thumbs-up"></i> <span>12</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-thumbs-down"></i> <span>2</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-comment"></i> <span>5</span>
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+    <% for(const issue of allIssues){ %>
+    <div class="issue-card" data-id="ISSUE-001">
+        <img src="<%= issue.image %>" alt="Issue Image" class="issue-image" />
+        <div class="issue-content">
+            <div class="issue-meta">
+            <span class="status pending">Pending</span>
+            <span class="priority high"><%= issue.priority %></span>
+            <span class="issue-date">15 Sep 2025</span>
+            </div>
+
+            <h3 class="issue-title"><%= issue.title %></h3>
+
+            <p><strong>Location:</strong> <%= issue.location %></p>
+            <p><strong>Issue ID:</strong> <%= issue._id %></p>
+            <p><strong>Reported by:</strong> Anushka Sharma</p>
+            <div class="issue-actions">
+                <div class="action">
+                    <i class="fas fa-thumbs-up"></i> <span>12</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-thumbs-down"></i> <span>2</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-comment"></i> <span>5</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <% } %>
+    <!-- <div class="issue-card" data-id="ISSUE-001">
+        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
+        <div class="issue-content">
+            <div class="issue-meta">
+            <span class="status pending">Pending</span>
+            <span class="priority high">High</span>
+            <span class="issue-date">15 Sep 2025</span>
+            </div>
+
+            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
+
+            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
+            <p><strong>Issue ID:</strong> ISSUE-001</p>
+            <p><strong>Reported by:</strong> Anushka Sharma</p>
+            <div class="issue-actions">
+                <div class="action">
+                    <i class="fas fa-thumbs-up"></i> <span>12</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-thumbs-down"></i> <span>2</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-comment"></i> <span>5</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="issue-card">
+        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
+        <div class="issue-content">
+            <div class="issue-meta">
+            <span class="status pending">Pending</span>
+            <span class="priority high">High</span>
+            <span class="issue-date">15 Sep 2025</span>
+            </div>
+
+            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
+
+            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
+            <p><strong>Issue ID:</strong> ISSUE-001</p>
+            <p><strong>Reported by:</strong> Anushka Sharma</p>
+            <div class="issue-actions">
+                <div class="action">
+                    <i class="fas fa-thumbs-up"></i> <span>12</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-thumbs-down"></i> <span>2</span>
+                </div>
+                <div class="action">
+                    <i class="fas fa-comment"></i> <span>5</span>
+                </div>
+            </div> 
+
+        </div>
+    </div>-->
   </section>
     </div>
 
