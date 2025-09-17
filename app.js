@@ -36,7 +36,10 @@ app.get("/home",(req,res)=>{
 });
 app.get("/report",(req,res)=>{
   res.render("report.ejs");
-})
+});
+// app.get("/issues",(req,res)=>{
+//   res.
+// })
 // app.post("/report",(req,res)=>{
 //     console.log(req.body.issue);
 // })
