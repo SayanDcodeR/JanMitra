@@ -66,6 +66,12 @@ body {
   color: var(--accent-green);
   border: 2px solid var(--accent-green);
 }
+.profile-icon i {
+  font-size: 1.8rem;
+  color: white;
+  transition: color 0.3s ease;
+}
+
 
 /* ✅ Footer */
 .footer {
