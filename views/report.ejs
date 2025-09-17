@@ -1,0 +1,131 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+  <div class="report-page-title">
+    <h2>Create Issue Report</h2>
+    <p>Report community issues with precise location mapping. Click on the map to pinpoint the exact location of the
+      problem.</p>
+  </div>
+
+  <div class="report-alert">
+    <strong><i class="fa-solid fa-triangle-exclamation"></i> Emergency Situations</strong>
+    For immediate emergencies requiring police, fire, or medical assistance, please call emergency services directly.
+    <br><br>
+    <button><i class="fa-solid fa-phone"></i> Emergency: 911</button>
+    <button class="non"><i class="fa-solid fa-phone"></i> Non-Emergency: 311</button>
+  </div>
+
+  <form>
+    <div class="report-container">
+
+      <div class="report-card">
+        <h3>Issue Details</h3>
+        <label for="title">Issue Title *</label>
+        <input type="text" id="title" placeholder="Brief, descriptive title for the issue">
+
+        <label for="desc">Description *</label>
+        <textarea id="desc" placeholder="Provide detailed information about the issue..."></textarea>
+
+        <label for="cat">Category *</label>
+        <select id="cat">
+          <option>Select a category</option>
+          <option>Road</option>
+          <option>Water</option>
+          <option>Electricity</option>
+        </select>
+
+        <label for="zone">Zone *</label>
+        <select id="zone">
+          <option>Select a zone</option>
+          <option>Zone 1</option>
+          <option>Zone 2</option>
+          <option>Zone 3</option>
+        </select>
+
+        <label>Priority Level</label>
+        <div class="report-priority-options">
+          <label class="report-priority-box low">
+            <input type="radio" name="priority" value="low">
+            <span class="report-priority-text">Low Priority</span>
+          </label>
+          <label class="report-priority-box medium">
+            <input type="radio" name="priority" value="medium">
+            <span class="report-priority-text">Medium Priority</span>
+          </label>
+          <label class="report-priority-box high">
+            <input type="radio" name="priority" value="high">
+            <span class="report-priority-text">High Priority</span>
+          </label>
+        </div>
+
+        <div class="report-upload">
+          <i class="fa-solid fa-camera"></i>
+          <p>Upload Photos or Videos (Optional)</p>
+          <input type="file" multiple>
+        </div>
+      </div>
+
+      <div class="report-card">
+        <h3>Location Selection</h3>
+        <div id="map"></div>
+        <button type="button" onclick="getLocation()">📍 My Location</button>
+        <button type="button" onclick="clearMarker()">Clear Selection</button>
+
+        <label for="lat">Latitude *</label>
+        <input type="text" id="lat">
+
+        <label for="lon">Longitude *</label>
+        <input type="text" id="lon">
+
+        <label for="address">Address or Landmark (Optional)</label>
+        <input type="text" id="address" placeholder="e.g., Near library...">
+      </div>
+    </div>
+
+    <div class="report-container">
+      <button class="report-submit-btn">Submit Issue Report</button>
+    </div>
+  </form>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([22.320664, 87.301898], 14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    var marker;
+
+    map.on('click', function (e) {
+      if (marker) map.removeLayer(marker);
+      marker = L.marker(e.latlng).addTo(map);
+      document.getElementById('lat').value = e.latlng.lat.toFixed(6);
+      document.getElementById('lon').value = e.latlng.lng.toFixed(6);
+    });
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (pos) {
+          var lat = pos.coords.latitude;
+          var lon = pos.coords.longitude;
+          map.setView([lat, lon], 15);
+          if (marker) map.removeLayer(marker);
+          marker = L.marker([lat, lon]).addTo(map);
+          document.getElementById('lat').value = lat.toFixed(6);
+          document.getElementById('lon').value = lon.toFixed(6);
+        });
+      } else {
+        alert("Geolocation not supported!");
+      }
+    }
+
+    function clearMarker() {
+      if (marker) {
+        map.removeLayer(marker);
+        marker = null;
+        document.getElementById('lat').value = "";
+        document.getElementById('lon').value = "";
+      }
+    }
+  </script>
+</body>
+</html>

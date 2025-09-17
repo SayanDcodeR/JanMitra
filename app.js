@@ -34,9 +34,12 @@ app.get("/home",(req,res)=>{
     // res.render("layouts/boilerplate.ejs");
     res.render("home.ejs"); 
 });
-app.post("/report",(req,res)=>{
-    console.log(req.body.issue);
+app.get("/report",(req,res)=>{
+  res.render("report.ejs");
 })
+// app.post("/report",(req,res)=>{
+//     console.log(req.body.issue);
+// })
 app.listen("8000",()=>{
     console.log("Server connected");
 });
