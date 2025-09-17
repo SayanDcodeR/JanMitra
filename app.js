@@ -32,7 +32,7 @@ app.post('/upload', (req, res) => {
 });
 app.get("/home",(req,res)=>{
     // res.render("layouts/boilerplate.ejs");
-    res.render("home.ejs");
+    res.render("home.ejs"); 
 });
 app.post("/report",(req,res)=>{
     console.log(req.body.issue);
