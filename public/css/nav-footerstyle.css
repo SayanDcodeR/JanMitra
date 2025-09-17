@@ -16,43 +16,43 @@ body {
 }
 
 /* ✅ Navbar */
-.navbar {
+.nav-navbar {
   background-color: var(--dark-green) !important;
 }
-.navbar .nav-link {
+.nav-navbar .nav-nav-link {
   color: white !important;
 }
-.navbar .nav-link:hover {
+.nav-navbar .nav-nav-link:hover {
   color: var(--deep-blue) !important;
 }
-.btn-register {
+.nav-btn-register {
   background-color: var(--accent-green);
   color: white;
   border-radius: 5px;
   padding: 0.5rem 1.2rem;
   text-decoration: none;
 }
-.btn-register:hover {
+.nav-btn-register:hover {
   background-color: var(--deep-blue);
   color: white;
 }
 
 /* ✅ Hero Section */
-.hero-section {
+.nav-hero-section {
   padding: 4rem 1rem;
   text-align: center;
 }
-.hero-title {
+.nav-hero-title {
   font-size: 2.5rem;
   font-weight: bold;
   color: #333;
 }
-.hero-subtitle {
+.nav-hero-subtitle {
   font-size: 1.2rem;
   color: var(--text-gray);
   margin-bottom: 2rem;
 }
-.btn-raise-issue {
+.nav-btn-raise-issue {
   background-color: var(--accent-green);
   color: white;
   border: none;
@@ -61,36 +61,30 @@ body {
   border-radius: 5px;
   transition: all 0.3s ease;
 }
-.btn-raise-issue:hover {
+.nav-btn-raise-issue:hover {
   background-color: white;
   color: var(--accent-green);
   border: 2px solid var(--accent-green);
 }
-.profile-icon i {
-  font-size: 1.8rem;
-  color: white;
-  transition: color 0.3s ease;
-}
-
 
 /* ✅ Footer */
-.footer {
+.nav-footer {
   background-color: var(--dark-green);
   color: white;
   padding: 2rem 0;
 }
-.footer h5 {
+.nav-footer h5 {
   font-weight: bold;
   margin-bottom: 1rem;
 }
-.footer a {
+.nav-footer a {
   color: #f1f1f1;
   text-decoration: none;
 }
-.footer a:hover {
+.nav-footer a:hover {
   color: var(--deep-blue);
 }
-.footer-divider {
+.nav-footer-divider {
   border-top: 1px solid var(--neutral-gray);
   margin: 1.5rem 0;
 }
