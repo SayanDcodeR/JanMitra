@@ -16,43 +16,48 @@ body {
 }
 
 /* ✅ Navbar */
-.nav-navbar {
-  background-color: var(--dark-green) !important;
+.custom-navbar {
+  background-color: var(--dark-green);
 }
-.nav-navbar .nav-nav-link {
+.custom-navbar .custom-nav-link {
   color: white !important;
+  transition: color 0.3s ease;
 }
-.nav-navbar .nav-nav-link:hover {
+.custom-navbar .custom-nav-link:hover {
   color: var(--deep-blue) !important;
 }
-.nav-btn-register {
+.custom-btn-register {
   background-color: var(--accent-green);
   color: white;
   border-radius: 5px;
   padding: 0.5rem 1.2rem;
   text-decoration: none;
+  transition: all 0.3s ease;
 }
-.nav-btn-register:hover {
-  background-color: var(--deep-blue);
-  color: white;
+.custom-btn-register:hover {
+  background-color: white;
+  color: var(--accent-green);
+  border: 2px solid var(--accent-green);
 }
 
 /* ✅ Hero Section */
-.nav-hero-section {
+.hero-section {
   padding: 4rem 1rem;
   text-align: center;
+  background-color: var(--soft-blue-white);
 }
-.nav-hero-title {
+.hero-title {
   font-size: 2.5rem;
   font-weight: bold;
   color: #333;
+  margin-bottom: 1rem;
 }
-.nav-hero-subtitle {
+.hero-subtitle {
   font-size: 1.2rem;
   color: var(--text-gray);
   margin-bottom: 2rem;
 }
-.nav-btn-raise-issue {
+.custom-btn-raise-issue {
   background-color: var(--accent-green);
   color: white;
   border: none;
@@ -61,13 +66,13 @@ body {
   border-radius: 5px;
   transition: all 0.3s ease;
 }
-.nav-btn-raise-issue:hover {
+.custom-btn-raise-issue:hover {
   background-color: white;
   color: var(--accent-green);
   border: 2px solid var(--accent-green);
 }
 
-/* ✅ Footer (unchanged class names) */
+/* ✅ Footer */
 .footer {
   background-color: var(--dark-green);
   color: white;
@@ -80,6 +85,7 @@ body {
 .footer a {
   color: #f1f1f1;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 .footer a:hover {
   color: var(--deep-blue);
