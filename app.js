@@ -31,6 +31,7 @@ app.post('/upload', (req, res) => {
   res.json({ message: 'Files uploaded successfully!', photos: photoPaths });
 });
 app.get("/home",(req,res)=>{
+    // res.render("layouts/boilerplate.ejs");
     res.render("home.ejs");
 });
 app.post("/report",(req,res)=>{
