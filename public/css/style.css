@@ -8,7 +8,10 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light-gray);
+    background-color: white;
+}
+.highlight-green {
+  color: var(--dark-green);
 }
 
 /* Header Styles */
@@ -48,7 +51,6 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: 4rem 0;
     text-align: center;
 }
@@ -80,9 +82,7 @@ body {
 
 /* Stats Section */
 .stats-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: 3rem 0;
-    margin: 2rem 0;
 }
 
 .stat-item {
