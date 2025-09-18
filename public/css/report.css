@@ -74,8 +74,9 @@ nav a:hover {
 }
 
 .report-page-title h2 {
-    font-size: 24px;
+    font-size: 2rem;
     margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .report-alert {
@@ -83,10 +84,10 @@ nav a:hover {
     border: 1px solid #ef9a9a;
     color: #b71c1c;
     padding: 15px;
-    border-radius: 6px;
-    margin: 20px auto;
+    margin: 15px auto;
     max-width: 900px;
     text-align: center;
+    border-radius: 30px;
 }
 
 .report-alert strong {
@@ -142,7 +143,7 @@ label {
     margin: 10px 0 5px;
 }
 
-/* input[type="text"],
+.report-card input[type="text"],
 textarea,
 select {
     width: 100%;
@@ -150,7 +151,7 @@ select {
     border: 1px solid #ccc;
     border-radius: 6px;
     margin-bottom: 15px;
-} */
+}
 
 textarea {
     resize: vertical;
@@ -207,7 +208,18 @@ textarea {
     border-radius: 6px;
     margin-bottom: 10px;
 }
-
+.loc{
+    border-radius: 8px;
+    padding: 0.15rem 0.35rem;
+    background-color:#F4B942;
+    border: none;
+}
+.clear-loc{
+    border-radius: 8px;
+    padding: 0.15rem 0.35rem;
+    background-color:#F9D68B;
+    border: none;
+}
 .report-upload {
     border: 2px dashed #aaa;
     padding: 20px;
@@ -225,7 +237,6 @@ textarea {
 
 .report-submit-btn {
     display: block;
-    width: 100%;
     background: #2e7d32;
     color: white;
     border: none;
