@@ -10,36 +10,6 @@ body {
     color: #333;
 }
 
-header {
-    background: #2e7d32;
-    color: white;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header h1 {
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-}
-
-header h1 i {
-    margin-right: 8px;
-}
-
-nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
 .report-header-icons {
     display: flex;
     align-items: center;
@@ -131,6 +101,7 @@ nav a:hover {
     min-width: 350px;
     max-width: 450px;
 }
+
 
 .report-card h3 {
     margin-bottom: 15px;
@@ -255,5 +226,93 @@ textarea {
     .report-container {
         flex-direction: column;
         align-items: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .report-page-title {
+        padding: 20px 10px;
+    }
+
+    .report-page-title h2 {
+        font-size: 1.4rem; /* Smaller heading */
+    }
+
+    .report-alert {
+        margin: 10px;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .report-alert button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .report-container {
+        flex-direction: column;
+        gap: 15px;
+        margin: 10px;
+    }
+
+    .report-card {
+        min-width: unset;  /* Remove fixed min width */
+        max-width: 100%;   /* Use full width */
+        padding: 15px;
+    }
+    .report-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    flex: 1 1 100%;
+    max-width: 600px;   /* All cards same width */
+    width: 100%;
+}
+    .report-card h3 {
+        font-size: 1.1rem;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    .report-card input[type="text"],
+    textarea,
+    select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    textarea {
+        height: 70px;
+    }
+
+    .report-priority-box {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    #map {
+        height: 200px; /* Reduce map height for small screens */
+    }
+
+    .report-upload {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .report-upload i {
+        font-size: 20px;
+    }
+
+    .report-submit-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .loc, .clear-loc {
+        font-size: 12px;
+        padding: 0.2rem 0.4rem;
     }
 }
