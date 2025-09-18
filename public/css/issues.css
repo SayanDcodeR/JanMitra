@@ -1,0 +1,243 @@
+.content {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f4f6f4;
+  color: #333;
+}
+.page-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  color: #1b5e20;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  font-size: 16px;
+  color: #4caf50;
+  font-weight: 500;
+}
+/* Search Bar */
+.search-bar {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s ease;
+  box-sizing: border-box;
+}
+
+.search-bar:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 4px rgba(76, 175, 80, 0.3);
+}
+
+/* Filter Section */
+.filters {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.filter-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+.filter-controls select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #f9fdf9;
+  outline: none;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
+.filter-controls select:focus {
+  border-color: #4caf50;
+}
+/* Reset Button */
+.reset-btn {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #4caf50;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+  /* justify-self: start; */
+}
+
+.reset-btn:hover {
+  background: #43a047;
+}
+
+.reset-btn:active {
+  transform: scale(0.97);
+}
+@media (max-width: 768px) {
+  .filters {
+    padding: 15px;
+  }
+
+  .filter-controls {
+    grid-template-columns: 1fr; /* stack filters vertically */
+  }
+
+  .reset-btn {
+    width: 100%; /* full width on mobile */
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-bar {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .filter-controls select {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .reset-btn {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+}
+/* Issues Grid */
+.issues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.issue-card {
+  background: #fff;
+  border: 1px solid #c8e6c9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+}
+
+.issue-card:hover {
+  transform: translateY(-5px);
+}
+
+.issue-content {
+  padding: 16px 18px;
+}
+
+.issue-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #555;
+}
+.status,
+.priority {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.status.pending { background: #f57c00; }
+.status.progress { background: #3f8dec; }
+.status.resolved { background: #4caf50; }
+
+.priority.high { background: #c62828; }
+.priority.medium { background: #ef6c00; }
+.priority.low { background: #2e7d32; }
+
+.issue-content h3 {
+  margin: 5px 0;
+  font-size: 18px;
+  color: #1b5e20;
+}
+
+
+/* Image */
+.issue-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.status, .priority {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+.status.pending {
+  background: #ff9800;
+}
+
+.priority.high {
+  background: #e53935;
+}
+
+/* Title */
+.issue-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2e7d32; 
+  margin: 8px 0;
+}
+
+/* Text */
+.issue-content p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.issue-actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.issue-actions .action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.issue-actions .action:hover {
+  color: #4caf50;
+}
+
+.issue-actions i {
+  font-size: 16px;
+}
