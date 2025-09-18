@@ -16,6 +16,7 @@ const multer = require('multer')
 const { storage } = require("./cloudConfig.js");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
+const User=require("./models/user.js");
 const upload = multer({ storage })
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -23,6 +24,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.json());
+
 const sessionOptions={
   secret:"mysupersecretcode",
   resave:false,
@@ -83,10 +86,30 @@ app.post("/report",upload.single('issue[image]'),async(req,res)=>{
 //     console.log(req.body.issue);
 // })
 app.get("/signup",(req,res)=>{
+  // Render signup form
   res.send("sign up");
 });
-app.post("/signup",(req,res)=>{
-  res.send("sign up post");
+app.post("/signup",async(req,res)=>{
+  console.log(req.body);
+  return res.send("ok");
+  // try {
+
+  //       const { username, email, password } = req.body;
+  //       const newUser = new User({ email, username });
+  //       const registeredUser = await User.register(newUser, password);
+  //       console.log(registeredUser);
+  //       req.login(registeredUser, (err) => {
+  //           if (err) {
+  //               return next(err);
+  //           }
+  //           req.flash("success", "Welcome to WanderLust");
+  //           res.redirect("/listings");
+  //       });
+  //   } catch (e) {
+  //       req.flash("error", e.message);
+  //       res.redirect("/signup");
+  //   }
+
 });
 app.get("/login",(req,res)=>{
   res.send("sign in login");
