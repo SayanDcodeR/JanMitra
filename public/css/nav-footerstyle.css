@@ -21,11 +21,14 @@ body {
 }
 .custom-navbar .custom-nav-link {
   color: white !important;
-  transition: color 0.3s ease;
+  text-decoration: none;
 }
 .custom-navbar .custom-nav-link:hover {
-  color: var(--deep-blue) !important;
+  text-decoration: none;
+  transform:translateY(-2px);
+  transition: transform 400ms;
 }
+
 .custom-btn-register {
   background-color: var(--accent-green);
   color: white;
@@ -38,11 +41,12 @@ body {
   background-color: white;
   color: var(--accent-green);
   border: 2px solid var(--accent-green);
+  text-decoration: none;
 }
 
 /* ✅ Hero Section */
 .hero-section {
-  padding: 4rem 1rem;
+  padding: 3rem 1rem;
   text-align: center;
   background-color: var(--soft-blue-white);
 }

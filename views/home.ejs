@@ -3,8 +3,6 @@
 
 <% layout("/layouts/boilerplate") %>
 
-<<<<<<< HEAD
-=======
 <body>
     <!-- Hero Section -->
     <section class="hero-section">
@@ -17,7 +15,6 @@
             </button>
         </div>
     </section>
->>>>>>> 6fb6b88a6d5c7d13bfa8e8ce246e92d99b6a2ea6
 
             <!-- <head>
         <meta charset="UTF-8">
@@ -30,28 +27,6 @@
 
 
             <body>
-                <!-- Hero Section -->
-                <section class="hero-section">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-12 text-center mb-4">
-                                <a class="navbar-brand d-inline-block mb-4" href="#">
-                                    <i class="fas fa-leaf"></i>Code4Earth
-                                </a>
-                            </div>
-                        </div>
-                        <h1 class="hero-title">Your city, Your voice, Our Responsibility</h1>
-                        <p class="hero-subtitle">Report civic issues, track their progress, and make your community
-                            better
-                            through
-                            crowdsourced civic engagement</p>
-                        <form action="/report" method="GET">
-                        <button class="btn btn-success btn-raise-issue text-white">
-                            <i class="fas fa-plus-circle me-2"></i>Raise Issue
-                        </button>
-                        </form>
-                    </div>
-                </section>
 
                 <!-- Stats Section -->
                 <section class="stats-section">
@@ -82,11 +57,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 text-center mt-2">
-                                <small class="stat-sublabel">Live Community Statistics</small>
-                            </div>
-                        </div>
                     </div>
                 </section>
 
@@ -96,15 +66,15 @@
                         <h2 class="location-title">Find Issues Near You</h2>
                         <p class="location-subtitle">Enter your location to see nearby civic issues</p>
                         <div class="location-input-group">
-                            <div class="d-flex">
-                                <input type="text" class="form-control form-control-lg me-2" id="locationInput"
-                                    placeholder="Enter your area, city, or pincode">
-                                <button class="btn btn-success btn-lg" onclick="searchLocation()">
+                            <div class="loc-search-bar">
+                                <input type="text" class="search-input" id="locationInput"
+                                        placeholder="Enter your area, city, or pincode">
+                                <button class="search-btn" onclick="searchLocation()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
                             <div class="mt-3">
-                                <button class="btn btn-outline-success" onclick="getUserLocation()">
+                                <button class="btn btn-outline-success btn-current" onclick="getUserLocation()">
                                     <i class="fas fa-location-arrow me-2"></i>Use My Current Location
                                 </button>
                             </div>
@@ -118,30 +88,26 @@
                         <h2 class="section-title">Recent Issues in Your Area</h2>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="issue-card" onclick="showIssueDetails(1)">
-                                    <div class="issue-status status-pending">PENDING</div>
-                                    <div class="issue-icon">
-                                        <i class="fas fa-road"></i>
+                               <div class="issue-card" onclick="showIssueDetails(1)">
+                                    <div class="issue-header">
+                                        <h3 class="issue-title">Pothole on Main Street</h3>
+                                        <span class="issue-status status-pending">PENDING</span>
                                     </div>
-                                    <h3 class="issue-title">Pothole on Main Street</h3>
-                                    <p class="issue-description">
-                                        Large pothole causing traffic issues near Central Market. Multiple vehicles
-                                        damaged.
-                                        Urgent
-                                        repair needed.
-                                    </p>
-                                    <div class="issue-meta">
-                                        <small><i class="fas fa-map-marker-alt"></i> Bhubaneswar, Odisha</small>
-                                        <small><i class="fas fa-clock"></i> 2 days ago</small>
+
+                                    <div class="issue-body">
+                                        <p class="issue-category"><i class="fas fa-road"></i> Road and Transportation</p>
+                                        <p class="issue-location"><i class="fas fa-map-marker-alt"></i> Bhubaneswar, Odisha</p>
+                                        <p class="issue-time"><i class="fas fa-clock"></i> 2 days ago</p>
                                     </div>
-                                    <div class="issue-actions">
-                                        <button class="btn btn-sm btn-outline-success me-2"
-                                            onclick="voteIssue(1, event)">
-                                            <i class="fas fa-thumbs-up"></i> <span id="votes-1">23</span>
+
+                                    <div class="issue-footer">
+                                        <button class="btn btn-vote" onclick="voteIssue(1, event)">
+                                        <i class="fas fa-thumbs-up"></i> <span id="votes-1">23</span>
                                         </button>
-                                        <a href="#" class="view-more">View Details</a>
+                                        <a href="#" class="btn-view">View Details</a>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="col-md-4">
                                 <div class="issue-card" onclick="showIssueDetails(2)">
@@ -267,38 +233,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Quick Actions Section -->
-                <section class="quick-actions">
-                    <div class="container">
-                        <div class="row text-center">
-                            <div class="col-md-3 col-6 mb-3">
-                                <div class="action-card" onclick="showReportForm()">
-                                    <i class="fas fa-plus-circle"></i>
-                                    <h5>Report Issue</h5>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6 mb-3">
-                                <div class="action-card" onclick="trackIssue()">
-                                    <i class="fas fa-search"></i>
-                                    <h5>Track Issue</h5>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6 mb-3">
-                                <div class="action-card" onclick="showMap()">
-                                    <i class="fas fa-map"></i>
-                                    <h5>Issue Map</h5>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6 mb-3">
-                                <div class="action-card" onclick="showLeaderboard()">
-                                    <i class="fas fa-trophy"></i>
-                                    <h5>Community</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
 
                 <!-- Bootstrap JS -->
                 <script
