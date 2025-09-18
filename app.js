@@ -82,6 +82,18 @@ app.post("/report",upload.single('issue[image]'),async(req,res)=>{
 // app.post("/report",(req,res)=>{
 //     console.log(req.body.issue);
 // })
+app.get("/signup",(req,res)=>{
+  res.send("sign up");
+});
+app.post("/signup",(req,res)=>{
+  res.send("sign up post");
+});
+app.get("/login",(req,res)=>{
+  res.send("sign in login");
+});
+app.post("/login",(req,res)=>{
+  res.send("login post");
+})
 app.listen("8000",()=>{
     console.log("Server connected");
 });
