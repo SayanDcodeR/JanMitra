@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Code4Earth</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/signup.css">
+</head>
+<body>
+  <div class="signup-container">
+  <div class="signup-logo">
+    <div class="signup-logo-icon">
+      <i class="fas fa-code-branch"></i>
+    </div>
+    <div class="signup-brand">Code4Earth</div>
+  </div>
+  
+  <h2 class="signup-heading">Create Your Account</h2>
+  
+  <form id="signupForm" method="post" action="/signup">
+    <div class="signup-form-group">
+      <label for="fullName">Full Name</label>
+      <div class="signup-input-wrapper">
+        <input type="text" id="fullName" name="user[username]" placeholder="Enter your name" required>
+        <span class="signup-error-message">Please enter your full name</span>
+      </div>
+    </div>
+    
+    <div class="signup-form-group">
+      <label for="email">Email Address</label>
+      <div class="signup-input-wrapper">
+        <input type="email" id="email" name="user[email]" placeholder="Enter your email" required>
+        <span class="signup-error-message">Please enter a valid email address</span>
+      </div>
+    </div>
+    
+    <div class="signup-form-group">
+      <label for="mobile">Mobile Number</label>
+      <div class="signup-input-wrapper">
+        <input type="tel" id="mobile" name="user[mobile]" placeholder="Enter your number" required>
+        <span class="signup-error-message">Please enter a valid mobile number</span>
+      </div>
+    </div>
+    
+    <div class="signup-form-group">
+      <label for="password">Password</label>
+      <div class="signup-input-wrapper">
+        <input type="password" id="password" name="user[password]" placeholder="Create a password" required>
+        <i class="fas fa-eye signup-toggle-password" id="togglePassword"></i>
+        <span class="signup-error-message">Password must be at least 8 characters</span>
+      </div>
+    </div>
+    
+    <div class="signup-form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <div class="signup-input-wrapper">
+        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+        <i class="fas fa-eye signup-toggle-password" id="toggleConfirmPassword"></i>
+        <span class="signup-error-message">Passwords do not match</span>
+      </div>
+    </div>
+    
+    <div class="signup-form-options">
+      <div class="signup-terms">
+        <input type="checkbox" id="terms">
+        <label for="terms">I agree to the Terms and Conditions</label>
+      </div>
+    </div>
+    
+    <button type="submit" class="signup-btn" id="signupBtn">
+      Sign Up
+      <i class="fas fa-spinner signup-spinner"></i>
+    </button>
+  </form>
+  
+  <div class="signup-divider">
+    <span>or continue with</span>
+  </div>
+  
+  <div class="signup-social-login">
+    <button class="signup-social-btn signup-google">
+      <i class="fab fa-google"></i> Google
+    </button>
+    <button class="signup-social-btn signup-github">
+      <i class="fab fa-github"></i> GitHub
+    </button>
+    <button class="signup-social-btn signup-twitter">
+      <i class="fab fa-twitter"></i> Twitter
+    </button>
+  </div>
+  
+  <div class="signup-extra">
+    Already have an account? <a href="/login">Login here</a>
+  </div>
+</div>
+
+<!-- Notification -->
+<!-- <div class="signup-notification" id="notification">
+  <i class="fas fa-check-circle"></i>
+  <div class="signup-notification-content">
+    <div class="signup-notification-title">Success</div>
+    <div class="signup-notification-message">Your account has been created successfully!</div>
+  </div>
+  <i class="fas fa-times signup-notification-close" id="notificationClose"></i>
+</div> -->
+
+  
+  <script>
+    // Toggle password visibility
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    
+    togglePassword.addEventListener('click', function() {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
+    
+    toggleConfirmPassword.addEventListener('click', function() {
+      const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      confirmPasswordInput.setAttribute('type', type);
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
+    
+    // Form validation and submission
+    const signupForm = document.getElementById('signupForm');
+    const fullNameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('email');
+    const mobileInput = document.getElementById('mobile');
+    const termsCheckbox = document.getElementById('terms');
+    const signupBtn = document.getElementById('signupBtn');
+    const notification = document.getElementById('notification');
+    const notificationClose = document.getElementById('notificationClose');
+    
+    // Show notification function
+    function showNotification(type, title, message) {
+      const notificationEl = document.getElementById('notification');
+      const icon = notificationEl.querySelector('i');
+      const titleEl = notificationEl.querySelector('.notification-title');
+      const messageEl = notificationEl.querySelector('.notification-message');
+      
+      // Set notification type
+      notificationEl.className = 'notification ' + type;
+      
+      // Set icon based on type
+      if (type === 'success') {
+        icon.className = 'fas fa-check-circle';
+      } else if (type === 'error') {
+        icon.className = 'fas fa-exclamation-circle';
+      }
+      
+      // Set content
+      titleEl.textContent = title;
+      messageEl.textContent = message;
+      
+      // Show notification
+      notificationEl.classList.add('show');
+      
+      // Auto hide after 5 seconds
+      setTimeout(() => {
+        notificationEl.classList.remove('show');
+      }, 5000);
+    }
+    
+    // Close notification
+    notificationClose.addEventListener('click', function() {
+      notification.classList.remove('show');
+    });
+    
+    // Form submission
+    signupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Reset previous errors
+      document.querySelectorAll('.error-message').forEach(el => {
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('.form-group input').forEach(input => {
+        input.classList.remove('error');
+      });
+      
+      // Basic validation
+      let isValid = true;
+      
+      // Full name validation
+      if (fullNameInput.value.trim().length < 2) {
+        fullNameInput.classList.add('error');
+        fullNameInput.nextElementSibling.style.display = 'block';
+        isValid = false;
+      }
+      
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailInput.value)) {
+        emailInput.classList.add('error');
+        emailInput.nextElementSibling.style.display = 'block';
+        isValid = false;
+      }
+      
+      // Mobile validation (simple check for digits and length)
+      const mobileRegex = /^\d{10,15}$/;
+      if (!mobileRegex.test(mobileInput.value.replace(/\D/g, ''))) {
+        mobileInput.classList.add('error');
+        mobileInput.nextElementSibling.style.display = 'block';
+        isValid = false;
+      }
+      
+      // Password validation
+      if (passwordInput.value.length < 8) {
+        passwordInput.classList.add('error');
+        passwordInput.nextElementSibling.style.display = 'block';
+        isValid = false;
+      }
+      
+      // Confirm password validation
+      if (confirmPasswordInput.value !== passwordInput.value) {
+        confirmPasswordInput.classList.add('error');
+        confirmPasswordInput.nextElementSibling.style.display = 'block';
+        isValid = false;
+      }
+      
+      // Terms validation
+      if (!termsCheckbox.checked) {
+        showNotification('error', 'Terms Required', 'Please agree to the Terms and Conditions to continue.');
+        isValid = false;
+      }
+      
+      if (isValid) {
+        // Show loading state
+        signupBtn.classList.add('loading');
+        signupBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+          // Reset button state
+          signupBtn.classList.remove('loading');
+          signupBtn.disabled = false;
+          
+          // Show success notification
+          showNotification('success', 'Account Created', 'Your account has been created successfully!');
+          
+          // Reset form
+          signupForm.reset();
+          
+          // In a real app, you would redirect to the dashboard or login page
+          // window.location.href = 'dashboard.html';
+        }, 2000);
+      } else {
+        // Show error notification
+        showNotification('error', 'Sign Up Failed', 'Please correct the errors and try again.');
+      }
+    });
+    
+    // Social login buttons
+    document.querySelectorAll('.social-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const platform = this.textContent.trim();
+        showNotification('success', `${platform} Sign Up`, `Redirecting to ${platform} authentication...`);
+        
+        // In a real app, you would redirect to the OAuth provider
+        // window.location.href = `/auth/${platform.toLowerCase()}`;
+      });
+    });
+  </script>
+</body>
+</html>

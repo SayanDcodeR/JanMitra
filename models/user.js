@@ -5,7 +5,8 @@ const userSchema=new Schema({
     email:{
         type:String,
         required:true
-    }
+    },
+    mobile:Number
 });
 userSchema.plugin(passportLocalMongoose);
 module.exports=mongoose.model('User',userSchema);
