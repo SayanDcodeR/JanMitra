@@ -25,7 +25,7 @@
       --transition: all 0.3s ease;
     }
 
-    body {
+    .login {
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -38,7 +38,7 @@
     }
 
     /* Background decoration */
-    body::before {
+    .login::before {
       content: "";
       position: absolute;
       width: 300px;
@@ -50,7 +50,7 @@
       z-index: 0;
     }
 
-    body::after {
+    .login::after {
       content: "";
       position: absolute;
       width: 200px;
@@ -62,7 +62,7 @@
       z-index: 0;
     }
 
-    .container {
+    .login-container {
       background: #5dd161;
       padding: 30px 25px;
       border-radius: 16px;
@@ -81,7 +81,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .container:hover {
+    .login-container:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
@@ -113,7 +113,7 @@
       letter-spacing: -0.5px;
     }
 
-    h2 {
+    .login-container h2 {
       margin-bottom: 20px;
       color: var(--secondary);
       font-size: 22px;
@@ -425,7 +425,7 @@
     }
 
     @media (max-width: 480px) {
-      .container { 
+      .login-container { 
         padding: 25px 20px; 
         max-width: 100%;
       }
@@ -434,7 +434,7 @@
         margin-bottom: 18px;
       }
       
-      h2 { font-size: 20px; }
+      .login-container h2 { font-size: 20px; }
       
       .btn { 
         font-size: 13px; 
@@ -453,8 +453,8 @@
     }
   </style>
 </head>
-<body>
-  <div class="container">
+<body class="login">
+  <div class="login-container">
     <div class="logo">
       <div class="logo-icon">
         <i class="fas fa-code-branch"></i>
