@@ -14,7 +14,7 @@
     <button class="non"><i class="fa-solid fa-phone"></i> Non-Emergency: 311</button>
   </div>
 
-  <form action="/report" method="POST">
+  <form action="/report" method="POST" enctype="multipart/form-data">
     <div class="report-container">
 
       <div class="report-card">
@@ -60,7 +60,7 @@
         <div class="report-upload">
           <i class="fa-solid fa-camera"></i>
           <p>Upload Photos or Videos (Optional)</p>
-          <input type="file" multiple>
+          <input name="issue[image]" type="file">
         </div>
       </div>
 

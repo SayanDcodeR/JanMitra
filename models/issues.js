@@ -10,7 +10,10 @@ const issueSchema=new Schema({
     category:String,
     zone:String,
     priority:String, 
-    image:String
+    image: {
+        url: String,
+        filename: String,
+    }
 
 });
 const Issue=mongoose.model("Issue",issueSchema);
