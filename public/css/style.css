@@ -213,7 +213,7 @@ body {
     text-align: center;
 }
 
-.issue-card {
+.home-issue-card {
   background: #fff;
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
@@ -221,12 +221,12 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  height: 22rem;
+  display: flex;
+  flex-direction: column; /* stack content + footer */
+  justify-content: space-between; /* pushes footer down */
 }
 
-.issue-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-}
 
 /* Header */
 .issue-header {
@@ -249,12 +249,23 @@ body {
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .status-pending {
   background: #fff3cd;
   color: #856404;
 }
+.status-resolved {
+  background: #d4edda;  /* light green */
+  color: #155724;       /* dark green */
+}
+
+.status-inprogress {
+  background: #cce5ff;  /* light blue */
+  color: #004085;       /* dark blue */
+}
+
 
 /* Body */
 .issue-body {
@@ -264,11 +275,15 @@ body {
 }
 
 .issue-body p {
-  margin: 0.35rem 0;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
   gap: 6px;
 }
+.issue-desc{
+    margin-bottom: 1rem;
+}
+
 
 .issue-body i {
   color: #6c757d;
@@ -276,41 +291,26 @@ body {
 
 /* Footer */
 .issue-footer {
+  margin-top: auto; /* push footer to bottom */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid #f1f3f5;
+  justify-content: center;
   padding-top: 0.75rem;
-}
-
-.btn-vote {
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.85rem;
-  color: #198754;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-vote:hover {
-  background: #198754;
-  color: #fff;
+  border-top: 1px solid #f1f3f5;
 }
 
 .btn-view {
   font-size: 0.9rem;
+  color: white;
   font-weight: 500;
-  color: #198754;
   text-decoration: none;
   padding: 0.4rem 0.8rem;
   border-radius: 8px;
   transition: background 0.2s ease;
+  background-color: var(--primary-green);
 }
 
 .btn-view:hover {
-  background: #e9f7ef;
+    background-color: var(--dark-green);
 }
 
 
