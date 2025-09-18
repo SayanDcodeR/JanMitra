@@ -71,13 +71,13 @@
         <button type="button" onclick="clearMarker()">Clear Selection</button>
 
         <label for="lat">Latitude *</label>
-        <input type="text" id="lat">
+        <input type="text" id="lat" name="issue[location][lat]">
 
         <label for="lon">Longitude *</label>
-        <input type="text" id="lon">
+        <input type="text" id="lon" name="issue[location][long]">
 
-        <label for="address">Address or Landmark (Optional)</label>
-        <input type="text" id="address" placeholder="e.g., Near library...">
+        <label for="address">Address or Landmark</label>
+        <input type="text" id="address" name="issue[address]" placeholder="e.g., Near library...">
       </div>
     </div>
 

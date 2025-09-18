@@ -13,7 +13,12 @@ const issueSchema=new Schema({
     image: {
         url: String,
         filename: String,
-    }
+    },
+    location:{
+        lat:Number,
+        long:Number
+    },
+    address:String
 
 });
 const Issue=mongoose.model("Issue",issueSchema);

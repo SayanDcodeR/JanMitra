@@ -67,9 +67,9 @@ app.get("/issues",async(req,res)=>{
   res.render("issues.ejs",{allIssues})
 });
 app.post("/report",upload.single('issue[image]'),async(req,res)=>{
+  // console.log(req.body.issue);
   const url = req.file.path;
     const filename = req.file.filename;
-    console.log(url,filename);
   const newIssue= new Issue(req.body.issue);
   newIssue.image={url,filename};
   await newIssue.save();
