@@ -85,84 +85,66 @@
                 <!-- Issues Near You Section -->
                 <section class="issues-section">
                     <div class="container">
-                        <h2 class="section-title">Recent Issues in Your Area</h2>
+                        <h2 class="section-title">Recent Issues</h2>
                         <div class="row">
                             <div class="col-md-4">
-                               <div class="issue-card" onclick="showIssueDetails(1)">
+                               <div class="home-issue-card" onclick="showIssueDetails(1)">
                                     <div class="issue-header">
                                         <h3 class="issue-title">Pothole on Main Street</h3>
                                         <span class="issue-status status-pending">PENDING</span>
                                     </div>
-
                                     <div class="issue-body">
-                                        <p class="issue-category"><i class="fas fa-road"></i> Road and Transportation</p>
-                                        <p class="issue-location"><i class="fas fa-map-marker-alt"></i> Bhubaneswar, Odisha</p>
+                                        <div class="issue-desc">Daily commuters face accidents, vehicle damage, and long traffic jams due to the deep pothole on Main Street.</div>
+                                        <p class="issue-category"><i class="fa-solid fa-triangle-exclamation"></i>Road and Transportation</p>
+                                        <p class="issue-location"><i class="fas fa-map-marker-alt"></i> 1st Street, Unit 1, Bapuji Nagar, Bhubaneswar, Odisha 751009</p>
                                         <p class="issue-time"><i class="fas fa-clock"></i> 2 days ago</p>
                                     </div>
 
                                     <div class="issue-footer">
-                                        <button class="btn btn-vote" onclick="voteIssue(1, event)">
-                                        <i class="fas fa-thumbs-up"></i> <span id="votes-1">23</span>
-                                        </button>
                                         <a href="#" class="btn-view">View Details</a>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-md-4">
-                                <div class="issue-card" onclick="showIssueDetails(2)">
-                                    <div class="issue-status status-progress">IN PROGRESS</div>
-                                    <div class="issue-icon">
-                                        <i class="fas fa-lightbulb"></i>
+                                <div class="home-issue-card" onclick="showIssueDetails(2)">
+                                    <div class="issue-header">
+                                        <h3 class="issue-title">Street Light Not Working</h3>
+                                        <span class="issue-status status-inprogress">IN PROGRESS</span>
                                     </div>
-                                    <h3 class="issue-title">Street Light Not Working</h3>
-                                    <p class="issue-description">
-                                        Street lights on Park Avenue have been non-functional for a week. Safety concern
-                                        for
-                                        pedestrians at night.
-                                    </p>
-                                    <div class="issue-meta">
-                                        <small><i class="fas fa-map-marker-alt"></i> Saheed Nagar</small>
-                                        <small><i class="fas fa-clock"></i> 5 days ago</small>
+                                    <div class="issue-body">
+                                        <div class="issue-desc"> Street lights on Park Avenue have been non-functional for a week. Safety concern for
+                                        pedestrians at night.</div>
+                                        <p class="issue-category"><i class="fa-solid fa-triangle-exclamation"></i> Electricity</p>
+                                        <p class="issue-location"><i class="fas fa-map-marker-alt"></i> Saheed Nagar,Odisha</p>
+                                        <p class="issue-time"><i class="fas fa-clock"></i> 5 days ago</p>
                                     </div>
-                                    <div class="issue-actions">
-                                        <button class="btn btn-sm btn-outline-success me-2"
-                                            onclick="voteIssue(2, event)">
-                                            <i class="fas fa-thumbs-up"></i> <span id="votes-2">45</span>
-                                        </button>
-                                        <a href="#" class="view-more">View Details</a>
+
+                                    <div class="issue-footer">
+                                        <a href="#" class="btn-view">View Details</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="issue-card" onclick="showIssueDetails(3)">
-                                    <div class="issue-status status-resolved">RESOLVED</div>
-                                    <div class="issue-icon">
-                                        <i class="fas fa-tint"></i>
+                                <div class="home-issue-card" onclick="showIssueDetails(3)">
+                                    <div class="issue-header">
+                                        <h3 class="issue-title">Water Supply Disruption</h3>
+                                        <span class="issue-status status-resolved">Resolved</span>
                                     </div>
-                                    <h3 class="issue-title">Water Supply Disruption</h3>
-                                    <p class="issue-description">
-                                        Water supply was disrupted in residential area. Issue has been resolved by
-                                        municipal
-                                        corporation.
-                                    </p>
-                                    <div class="issue-meta">
-                                        <small><i class="fas fa-map-marker-alt"></i> Jaydev Vihar</small>
-                                        <small><i class="fas fa-clock"></i> 1 week ago</small>
+                                    <div class="issue-body">
+                                        <div class="issue-desc"> Water Supply was disrupted in residential area. Issue has been resolved by Municipal Corporation.</div>
+                                        <p class="issue-category"><i class="fa-solid fa-triangle-exclamation"></i>Water</p>
+                                        <p class="issue-location"><i class="fas fa-map-marker-alt"></i>KIIT, Patia,Bhubaneswar,Odisha  751024</p>
+                                        <p class="issue-time"><i class="fas fa-clock"></i>29.08.2025</p>
                                     </div>
-                                    <div class="issue-actions">
-                                        <button class="btn btn-sm btn-outline-success me-2"
-                                            onclick="voteIssue(3, event)">
-                                            <i class="fas fa-thumbs-up"></i> <span id="votes-3">67</span>
-                                        </button>
-                                        <a href="#" class="view-more">View Details</a>
+                                    <div class="issue-footer">
+                                        <a href="#" class="btn-view">View Details</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="text-center mt-4">
-                            <button class="btn btn-outline-success btn-lg" onclick="loadMoreIssues()">
-                                <i class="fas fa-plus me-2"></i>Load More Issues
+                            <button class="btn btn-outline-success" onclick="loadMoreIssues()">
+                                View More Issues
                             </button>
                         </div>
                     </div>
