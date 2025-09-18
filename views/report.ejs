@@ -2,8 +2,7 @@
 <body>
   <div class="report-page-title">
     <h2>Create Issue Report</h2>
-    <p>Report community issues with precise location mapping. Click on the map to pinpoint the exact location of the
-      problem.</p>
+    <p>Pinpoint and report community problems by clicking the exact location on the map</p>
   </div>
 
   <div class="report-alert">
@@ -20,6 +19,7 @@
       <div class="report-card">
         <h3>Issue Details</h3>
         <label for="title">Issue Title *</label>
+<<<<<<< HEAD
         <input type="text" id="title" name="issue[title]" placeholder="Brief, descriptive title for the issue">
 
         <label for="desc">Description *</label>
@@ -27,14 +27,28 @@
 
         <label for="cat">Category *</label>
         <select name="issue[category]" id="cat">
+=======
+        <input type="text" id="title" placeholder="Brief, descriptive title for the issue" required>
+
+        <label for="desc">Description *</label>
+        <textarea id="desc" placeholder="Provide detailed information about the issue..." required></textarea>
+
+        <label for="cat">Category *</label>
+        <select id="cat" required>
+>>>>>>> dev
           <option>Select a category</option>
           <option value="road">Road</option>
           <option value="water">Water</option>
           <option value="electricity">Electricity</option>
         </select>
 
+<<<<<<< HEAD
         <label for="zone">Zone *</label>
         <select name="issue[zone]" id="zone">
+=======
+        <label for="zone">Zone</label>
+        <select id="zone">
+>>>>>>> dev
           <option>Select a zone</option>
           <option value="zone-1">Zone 1</option>
           <option value="zone-2">Zone 2</option>
@@ -67,8 +81,8 @@
       <div class="report-card">
         <h3>Location Selection</h3>
         <div id="map"></div>
-        <button type="button" onclick="getLocation()">📍 My Location</button>
-        <button type="button" onclick="clearMarker()">Clear Selection</button>
+        <button type="button" onclick="getLocation()" class="loc"><i class="fa-solid fa-location-dot"></i> My Location</button>
+        <button type="button" onclick="clearMarker()" class="clear-loc">Clear Selection</button>
 
         <label for="lat">Latitude *</label>
         <input type="text" id="lat" name="issue[location][lat]">
