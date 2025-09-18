@@ -65,17 +65,17 @@ app.get("/home", (req, res) => {
   // res.render("layouts/boilerplate.ejs");
   res.render("home.ejs");
 });
-app.get("/report",isLoggedIn, (req, res) => {
+app.get("/report",saveRedirectUrl, isLoggedIn, (req, res) => {
   res.render("report.ejs");
 });
 app.get("/about", (req, res) => {
   res.render("about.ejs");
 });
-app.get("/issues",isLoggedIn,async (req, res) => {
+app.get("/issues",async (req, res) => {
   const allIssues = await Issue.find({});
   res.render("issues.ejs", { allIssues })
 });
-app.post("/report",saveRedirectUrl, upload.single('issue[image]'), async (req, res) => {
+app.post("/report",saveRedirectUrl,isLoggedIn, upload.single('issue[image]'), async (req, res) => {
   // console.log(req.body.issue);
   const url = req.file.path;
   const filename = req.file.filename;
@@ -124,7 +124,16 @@ app.get("/login", (req, res) => {
 app.post("/login", saveRedirectUrl, passport.authenticate("local", { failureRedirect: "/login", failureFlash: true }),(req, res) => {
   const redirectUrl = res.locals.redirectUrl || "/home";
   res.redirect(redirectUrl);
-})
+});
+app.get("/logout",(req,res)=>{
+  req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        // req.flash("success", "You are logged out!");
+        res.redirect("/home");
+    })
+});
 app.listen("8000", () => {
   console.log("Server connected");
 });
