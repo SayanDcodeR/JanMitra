@@ -136,6 +136,9 @@ app.get("/logout",(req,res)=>{
         res.redirect("/home");
     })
 });
+app.get("/profile",(req,res)=>{
+  res.render("profile-final.ejs");
+})
 app.listen("8000", () => {
   console.log("Server connected");
 });
