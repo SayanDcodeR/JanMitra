@@ -17,7 +17,7 @@ const { storage } = require("./cloudConfig.js");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-const { isLoggedIn, saveRedirectUrl } = require("./middleware.js");
+const { isLoggedIn, saveRedirectUrl, isAdmin } = require("./middleware.js");
 const upload = multer({ storage })
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -102,8 +102,9 @@ app.post("/signup", async (req, res) => {
   // return res.send("ok");
   try {
 
-    const { username, email, mobile, password } = req.body.user;
-    const newUser = new User({ email, username, mobile });
+    const { username, email, mobile,role} = req.body;
+   
+    const newUser = new User({ email, username, mobile, role });
     // console.log(newUser);
     const registeredUser = await User.register(newUser, password);
     console.log(registeredUser);
@@ -137,7 +138,7 @@ app.get("/logout",(req,res)=>{
     })
 });
 app.get("/profile",(req,res)=>{
-  res.render("profile-final.ejs");
+  res.render("profile.ejs");
 })
 app.listen("8000", () => {
   console.log("Server connected");

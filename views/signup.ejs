@@ -25,7 +25,7 @@
     <div class="signup-form-group">
       <label for="fullName">Full Name</label>
       <div class="signup-input-wrapper">
-        <input type="text" id="fullName" name="user[username]" placeholder="Enter your name" required>
+        <input type="text" id="fullName" name="username" placeholder="Enter your name" required>
         <span class="signup-error-message">Please enter your full name</span>
       </div>
     </div>
@@ -33,7 +33,7 @@
     <div class="signup-form-group">
       <label for="email">Email Address</label>
       <div class="signup-input-wrapper">
-        <input type="email" id="email" name="user[email]" placeholder="Enter your email" required>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
         <span class="signup-error-message">Please enter a valid email address</span>
       </div>
     </div>
@@ -41,7 +41,7 @@
     <div class="signup-form-group">
       <label for="mobile">Mobile Number</label>
       <div class="signup-input-wrapper">
-        <input type="tel" id="mobile" name="user[mobile]" placeholder="Enter your number" required>
+        <input type="tel" id="mobile" name="mobile" placeholder="Enter your number" required>
         <span class="signup-error-message">Please enter a valid mobile number</span>
       </div>
     </div>
@@ -49,7 +49,7 @@
     <div class="signup-form-group">
       <label for="password">Password</label>
       <div class="signup-input-wrapper">
-        <input type="password" id="password" name="user[password]" placeholder="Create a password" required>
+        <input type="password" id="password" name="password" placeholder="Create a password" required>
         <i class="fas fa-eye signup-toggle-password" id="togglePassword"></i>
         <span class="signup-error-message">Password must be at least 8 characters</span>
       </div>
@@ -66,8 +66,8 @@
     
     <div class="signup-form-options">
       <div class="signup-terms">
-        <input type="checkbox" id="terms">
-        <label for="terms">I agree to the Terms and Conditions</label>
+        <input type="checkbox" id="terms" name="role" value="admin">
+        <label for="terms">Sign up as administrator</label>
       </div>
     </div>
     

@@ -12,3 +12,12 @@ module.exports.saveRedirectUrl = (req, res, next) => {
     }
     next();
 }   
+module.exports.isAdmin = (req, res, next) => {
+ 
+  if (req.user && req.user.role === 'admin') {
+    next();
+  } else {
+    // req.flash('error', 'Access denied. Administrators only.');
+    res.redirect('/home');
+  }
+};

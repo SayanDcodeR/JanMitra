@@ -6,7 +6,12 @@ const userSchema=new Schema({
         type:String,
         required:true
     },
-    mobile:Number
+    mobile:Number,
+    role: {
+    type: String,
+    enum: ['citizen', 'admin'], // or ['citizen', 'employee', 'admin']
+    default: 'citizen'
+  },
 });
 userSchema.plugin(passportLocalMongoose);
 module.exports=mongoose.model('User',userSchema);
