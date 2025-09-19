@@ -263,7 +263,8 @@
 
             <p><strong>Location:</strong> <%= issue.address %></p>
             <p><strong>Issue ID:</strong> <%= issue._id %></p>
-            <p><strong>Reported by:</strong> <%= issue.user.username %></p>
+            <% if(issue.user){ %>
+            <p><strong>Reported by:</strong> <%= issue.user.username %></p><% } %>
             <div class="issue-actions">
                 <div class="action">
                     <i class="fas fa-thumbs-up"></i> <span>12</span>

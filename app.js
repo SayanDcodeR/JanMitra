@@ -87,12 +87,7 @@ app.post("/report",saveRedirectUrl,isLoggedIn, upload.single('issue[image]'), as
   const allIssues = await Issue.find({});
   res.redirect("/issues");
 })
-// app.get("/issues",(req,res)=>{
-//   res.
-// })
-// app.post("/report",(req,res)=>{
-//     console.log(req.body.issue);
-// })
+
 app.get("/signup", (req, res) => {
   // Render signup form
   res.render("signup.ejs");
@@ -101,13 +96,13 @@ app.post("/signup", async (req, res) => {
   // console.log(req.body);
   // return res.send("ok");
   try {
-
-    const { username, email, mobile,role} = req.body;
+    // console.log(req.body);
+    const { username, email, mobile,role,password} = req.body;
    
     const newUser = new User({ email, username, mobile, role });
     // console.log(newUser);
     const registeredUser = await User.register(newUser, password);
-    console.log(registeredUser);
+    // console.log(registeredUser);
     req.login(registeredUser, (err) => {
         if (err) {
             return next(err);
@@ -117,7 +112,7 @@ app.post("/signup", async (req, res) => {
     });
   } catch (e) {
     // req.flash("error", e.message);
-    res.send("error");
+    res.send(e.message);
   }
 
 });
