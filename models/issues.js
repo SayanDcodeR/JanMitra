@@ -18,7 +18,15 @@ const issueSchema=new Schema({
         lat:Number,
         long:Number
     },
-    address:String
+    address:String,
+    createdAt:{
+        type:Date,
+        default:Date.now()
+    },
+    user:{
+        type:Schema.Types.ObjectId,
+        ref:"User"
+    }
 
 });
 const Issue=mongoose.model("Issue",issueSchema);

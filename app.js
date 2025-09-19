@@ -72,8 +72,9 @@ app.get("/about", (req, res) => {
   res.render("about.ejs");
 });
 app.get("/issues",async (req, res) => {
-  const allIssues = await Issue.find({});
-  res.render("issues.ejs", { allIssues })
+  const allIssues = await Issue.find({}).populate("user");
+  // console.log(allIssues);
+  res.render("issues.ejs", { allIssues });
 });
 app.post("/report",saveRedirectUrl,isLoggedIn, upload.single('issue[image]'), async (req, res) => {
   // console.log(req.body.issue);
@@ -81,6 +82,7 @@ app.post("/report",saveRedirectUrl,isLoggedIn, upload.single('issue[image]'), as
   const filename = req.file.filename;
   const newIssue = new Issue(req.body.issue);
   newIssue.image = { url, filename };
+  newIssue.user=req.user._id;
   await newIssue.save();
   const allIssues = await Issue.find({});
   res.redirect("/issues");
