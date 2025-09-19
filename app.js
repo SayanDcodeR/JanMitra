@@ -4,7 +4,8 @@ if (process.env.NODE_ENV != "production") {
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const MONGO_URL = "mongodb://127.0.0.1:27017/communityOne";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/communityOne";
+const dbUrl=process.env.ATLASDB_URL;
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -45,7 +46,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 main()
   .then(() => {
@@ -145,6 +146,44 @@ app.get("/profile",(req,res)=>{
 app.get("/admin",(req,res)=>{
   res.render("admindash.ejs");
 })
+app.get("/search-issues", async (req, res) => {
+  try {
+    const { location } = req.query;
+    
+    if (!location) {
+      return res.json({ success: false, message: "Location parameter is required" });
+    }
+
+    // Create a case-insensitive regex search for location
+    const locationRegex = new RegExp(location, 'i');
+    
+    // Search in both address and zone fields
+    const issues = await Issue.find({
+      $or: [
+        { address: { $regex: locationRegex } },
+        { zone: { $regex: locationRegex } }
+      ]
+    }).populate("user", "username").sort({ createdAt: -1 });
+
+    res.json({
+      success: true,
+      issues: issues,
+      count: issues.length,
+      searchTerm: location
+    });
+
+  } catch (error) {
+    console.error("Search error:", error);
+    res.status(500).json({ 
+      success: false, 
+      message: "Error searching issues" 
+    });
+  }
+});
+app.get("/test",(req,res)=>{
+  res.render("search.ejs");
+})
+
 app.listen("8000", () => {
   console.log("Server connected");
 });

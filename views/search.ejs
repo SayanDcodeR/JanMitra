@@ -1,0 +1,112 @@
+<!-- views/search-results.ejs -->
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+    <div class="search-info">
+        <h4><i class="fas fa-search me-2"></i>Search Results for "<%= searchLocation %>"</h4>
+        <p><%= resultCount %> issue<%= resultCount !== 1 ? 's' : '' %> found</p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <form method="GET" action="/search-results" class="filter-form">
+            <input type="hidden" name="location" value="<%= searchLocation %>">
+            <div class="filter-group">
+                <div class="filter-item">
+                    <label>Status</label>
+                    <select name="status" class="filter-select" onchange="this.form.submit()">
+                        <option value="">All Status</option>
+                        <option value="pending" <%= (typeof filters !== 'undefined' && filters.status === 'pending') ? 'selected' : '' %>>Pending</option>
+                        <option value="resolved" <%= (typeof filters !== 'undefined' && filters.status === 'resolved') ? 'selected' : '' %>>Resolved</option>
+                    </select>
+                </div>
+                
+                <div class="filter-item">
+                    <label>Category</label>
+                    <select name="category" class="filter-select" onchange="this.form.submit()">
+                        <option value="">All Categories</option>
+                        <option value="road" <%= (typeof filters !== 'undefined' && filters.category === 'road') ? 'selected' : '' %>>Road & Transportation</option>
+                        <option value="water" <%= (typeof filters !== 'undefined' && filters.category === 'water') ? 'selected' : '' %>>Water Supply</option>
+                        <option value="electricity" <%= (typeof filters !== 'undefined' && filters.category === 'electricity') ? 'selected' : '' %>>Electricity</option>
+                        <option value="waste" <%= (typeof filters !== 'undefined' && filters.category === 'waste') ? 'selected' : '' %>>Waste Management</option>
+                        <option value="safety" <%= (typeof filters !== 'undefined' && filters.category === 'safety') ? 'selected' : '' %>>Public Safety</option>
+                        <option value="other" <%= (typeof filters !== 'undefined' && filters.category === 'other') ? 'selected' : '' %>>Other</option>
+                    </select>
+                </div>
+                
+                <button type="button" class="clear-filters" onclick="clearFilters()">
+                    <i class="fas fa-times me-1"></i>Clear Filters
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Search Results -->
+    <div class="search-results-container">
+        <% if (issues.length > 0) { %>
+            <div class="row">
+                <% issues.forEach(function(issue) { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="home-issue-card">
+                            <div class="issue-header">
+                                <h3 class="issue-title"><%= issue.title %></h3>
+                                <span class="issue-status status-<%= issue.status %>">
+                                    <%= issue.status.toUpperCase() %>
+                                </span>
+                            </div>
+                            <div class="issue-body">
+                                <div class="issue-desc"><%= issue.description %></div>
+                                <p class="issue-category">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <%= issue.category || 'General' %>
+                                </p>
+                                <p class="issue-location">
+                                    <i class="fas fa-map-marker-alt"></i> 
+                                    <%= issue.address || issue.zone || 'Location not specified' %>
+                                </p>
+                                <p class="issue-time">
+                                    <i class="fas fa-clock"></i> 
+                                    <%= new Date(issue.createdAt).toLocaleDateString() %>
+                                </p>
+                                <% if (issue.user) { %>
+                                    <p class="issue-reporter">
+                                        <i class="fas fa-user"></i> 
+                                        Reported by: <%= issue.user.username %>
+                                    </p>
+                                <% } %>
+                            </div>
+                            <div class="issue-footer">
+                                <a href="/issues/<%= issue._id %>" class="btn-view">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="no-results">
+                <i class="fas fa-search-minus"></i>
+                <h4>No Issues Found</h4>
+                <p>We couldn't find any issues in "<%= searchLocation %>". Try searching with a different location or broader terms.</p>
+                <a href="/home" class="btn btn-success mt-3">
+                    <i class="fas fa-home me-2"></i>Back to Home
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Back to Home Button -->
+    <div class="text-center mt-4 mb-5">
+        <a href="/home" class="btn btn-outline-success">
+            <i class="fas fa-arrow-left me-2"></i>Back to Home
+        </a>
+    </div>
+</div>
+
+<script>
+function clearFilters() {
+    const form = document.querySelector('.filter-form');
+    const selects = form.querySelectorAll('select');
+    selects.forEach(select => select.selectedIndex = 0);
+    form.submit();
+}
+</script>
