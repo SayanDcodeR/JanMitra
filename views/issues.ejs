@@ -76,7 +76,7 @@
                     <i class="fas fa-comment"></i> <span>5</span>
                 </div>
             </div>
-
+            <button class="issue-view-details">View Details</button>
         </div>
     </div>
 
@@ -105,7 +105,7 @@
                     <i class="fas fa-comment"></i> <span>0</span>
                 </div>
             </div>
-
+            <button class="issue-view-details">View Details</button>
         </div>
     </div>
 
@@ -134,11 +134,22 @@
                     <i class="fas fa-comment"></i> <span>0</span>
                 </div>
             </div>
-
+            <button class="issue-view-details">View Details</button>
         </div>
     </div>
   </section>
     </div>
 
+
+ <script>
+        document.querySelectorAll(".issue-view-details").forEach(btn => {
+            btn.addEventListener("click", function (e) {
+              console.log("Button is clicked");
+                e.stopPropagation();
+                let issueId = this.closest(".issue-card").dataset.id;
+                window.location.href = "/issue-details?id=" + issueId;
+            });
+        });
+    </script>
 </body>
 
