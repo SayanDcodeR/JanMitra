@@ -1,57 +1,57 @@
 <% layout("/layouts/boilerplate") %>
-<body>
+
     <div class="content">
 
-   <!-- Page Heading -->
-  <header class="page-header">
-    <h1>Civic Issues Dashboard</h1>
-    <p>Track, prioritize, and resolve community problems.</p>
-  </header>
-  <!-- Filter Section -->
-  <section class="filters">
-    <input type="text" class="search-bar" placeholder="Search issues by title, description, or location..."/>
-    <div class="filter-controls">
-      <select>
-        <option>All Categories</option>
-        <option>Garbage</option>
-        <option>Pothole</option>
-        <option>Streetlight</option>
-        <option>Waterlogging</option>
-      </select>
+        <!-- Page Heading -->
+        <header class="page-header">
+            <h1>Civic Issues Dashboard</h1>
+            <p>Track, prioritize, and resolve community problems.</p>
+        </header>
+        <!-- Filter Section -->
+        <section class="filters">
+            <input type="text" class="search-bar" placeholder="Search issues by title, description, or location..." />
+            <div class="filter-controls">
+                <select>
+                    <option>All Categories</option>
+                    <option>Garbage</option>
+                    <option>Pothole</option>
+                    <option>Streetlight</option>
+                    <option>Waterlogging</option>
+                </select>
 
-      <select>
-        <option>All Zones</option>
-        <option>North Zone</option>
-        <option>South Zone</option>
-        <option>East Zone</option>
-        <option>West Zone</option>
-      </select>
+                <select>
+                    <option>All Zones</option>
+                    <option>North Zone</option>
+                    <option>South Zone</option>
+                    <option>East Zone</option>
+                    <option>West Zone</option>
+                </select>
 
-      <select>
-        <option>All Status</option>
-        <option>Pending</option>
-        <option>In Progress</option>
-        <option>Resolved</option>
-      </select>
+                <select>
+                    <option>All Status</option>
+                    <option>Pending</option>
+                    <option>In Progress</option>
+                    <option>Resolved</option>
+                </select>
 
-      <select>
-        <option>All Priority</option>
-        <option>High</option>
-        <option>Medium</option>
-        <option>Low</option>
-      </select>
+                <select>
+                    <option>All Priority</option>
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
+                </select>
 
-      <select>
-        <option>Latest</option>
-        <option>Oldest</option>
-      </select>
-      <button class="reset-btn">Reset Filters</button>
-    </div>
-  </section>
+                <select>
+                    <option>Latest</option>
+                    <option>Oldest</option>
+                </select>
+                <button class="reset-btn">Reset Filters</button>
+            </div>
+        </section>
 
-  <!-- Issues Grid -->
-  <section class="issues-grid">
-    <!-- <div class="issue-card" data-id="ISSUE-001">
+        <!-- Issues Grid -->
+        <section class="issues-grid">
+            <!-- <div class="issue-card" data-id="ISSUE-001">
         <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
         <div class="issue-content">
             <div class="issue-meta">
@@ -249,38 +249,49 @@
 
         </div>
     </div> -->
-    <% for(const issue of allIssues){ %>
-    <div class="issue-card" data-id="ISSUE-001">
-        <img src="<%= issue.image.url %>" alt="Issue Image" class="issue-image" />
-        <div class="issue-content">
-            <div class="issue-meta">
-            <span class="status pending">Pending</span>
-            <span class="priority high"><%= issue.priority %></span>
-            <span class="issue-date">15 Sep 2025</span>
-            </div>
+            <% for(const issue of allIssues){ %>
+                <div class="issue-card" data-id="ISSUE-001">
+                    <img src="<%= issue.image.url %>" alt="Issue Image" class="issue-image" />
+                    <div class="issue-content">
+                        <div class="issue-meta">
+                            <span class="status pending">Pending</span>
+                            <span class="priority high">
+                                <%= issue.priority %>
+                            </span>
+                            <span class="issue-date">15 Sep 2025</span>
+                        </div>
 
-            <h3 class="issue-title"><%= issue.title %></h3>
+                        <h3 class="issue-title">
+                            <%= issue.title %>
+                        </h3>
 
-            <p><strong>Location:</strong> <%= issue.address %></p>
-            <p><strong>Issue ID:</strong> <%= issue._id %></p>
-            <% if(issue.user){ %>
-            <p><strong>Reported by:</strong> <%= issue.user.username %></p><% } %>
-            <div class="issue-actions">
-                <div class="action">
-                    <i class="fas fa-thumbs-up"></i> <span>12</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-thumbs-down"></i> <span>2</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-comment"></i> <span>5</span>
-                </div>
-            </div>
+                        <p><strong>Location:</strong>
+                            <%= issue.address %>
+                        </p>
+                        <p><strong>Issue ID:</strong>
+                            <%= issue._id %>
+                        </p>
+                        <% if(issue.user){ %>
+                            <p><strong>Reported by:</strong>
+                                <%= issue.user.username %>
+                            </p>
+                            <% } %>
+                                <div class="issue-actions">
+                                    <div class="action">
+                                        <i class="fas fa-thumbs-up"></i> <span>12</span>
+                                    </div>
+                                    <div class="action">
+                                        <i class="fas fa-thumbs-down"></i> <span>2</span>
+                                    </div>
+                                    <div class="action">
+                                        <i class="fas fa-comment"></i> <span>5</span>
+                                    </div>
+                                </div>
 
-        </div>
-    </div>
-    <% } %>
-    <!-- <div class="issue-card" data-id="ISSUE-001">
+                    </div>
+                </div>
+                <% } %>
+                    <!-- <div class="issue-card" data-id="ISSUE-001">
         <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
         <div class="issue-content">
             <div class="issue-meta">
@@ -336,8 +347,5 @@
 
         </div>
     </div>-->
-  </section>
+        </section>
     </div>
-
-</body>
-

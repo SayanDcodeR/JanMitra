@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Municipal Admin Dashboard</title>
+  <link rel="stylesheet" href="../css/admindash.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Leaflet.js -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="logo">Municipal Coorporation Portal</div>
+    <div class="topbar-right">
+      <div class="notification">
+        <i class="fas fa-bell"></i>
+        <span class="badge">3</span>
+      </div>
+      <!-- <div class="profile">
+        <img src="../images/profile.png" alt="Profile">
+      </div>
+    </div> -->
+    <a href="/logout">Logout</a>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Cards -->
+    <section class="analytics-bar">
+        <div class="stat-widget pending">
+            <i class="fa-regular fa-circle-xmark"></i>
+            <div>
+            <h2>48</h2>
+            <p>Pending</p>
+            </div>
+        </div>
+        <div class="stat-widget progress">
+            <i class="fa-regular fa-clock"></i>
+            <div>
+            <h2>9</h2>
+            <p>In Progress</p>
+            </div>
+        </div>
+        <div class="stat-widget resolved">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+            <h2>7</h2>
+            <p>Resolved</p>
+            </div>
+        </div>
+        <div class="stat-widget total">
+            <i class="fa-regular fa-user"></i>
+            <div>
+            <h2>100</h2>
+            <p>Total</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Charts -->
+    <section class="charts">
+      <div class="chart-container">
+        <h3>Area-wise Complaints</h3>
+        <canvas id="areaChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Category-wise Complaints</h3>
+        <canvas id="categoryChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters">
+        <h3>All Complaints</h3>
+        <input type="text" class="search-bar" placeholder="Search issues by title, description, or location..."/>
+        <div class="filter-controls">
+        <select>
+            <option>All Categories</option>
+            <option>Garbage</option>
+            <option>Pothole</option>
+            <option>Streetlight</option>
+            <option>Waterlogging</option>
+        </select>
+
+        <select>
+            <option>All Zones</option>
+            <option>North Zone</option>
+            <option>South Zone</option>
+            <option>East Zone</option>
+            <option>West Zone</option>
+        </select>
+
+        <select>
+            <option>All Status</option>
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Resolved</option>
+        </select>
+
+        <select>
+            <option>All Priority</option>
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+        </select>
+
+        <select>
+            <option>Latest</option>
+            <option>Oldest</option>
+        </select>
+        <button class="reset-btn">Reset</button>
+        </div>
+    </section>
+
+    <!-- Table -->
+    <section class="complaints">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Category</th>
+            <th>Area</th>
+            <th>Status</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1001</td>
+            <td>Road</td>
+            <td>Sector 12</td>
+            <td><span class="status pending">Pending</span></td>
+            <td>2025-09-15</td>
+          </tr>
+          <tr>
+            <td>1002</td>
+            <td>Water</td>
+            <td>Sector 8</td>
+            <td><span class="status progress">In Progress</span></td>
+            <td>2025-09-14</td>
+          </tr>
+          <tr>
+            <td>1003</td>
+            <td>Electricity</td>
+            <td>Sector 5</td>
+            <td><span class="status resolved">Resolved</span></td>
+            <td>2025-09-13</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Map -->
+    <section class="map-section">
+      <h3>Live Complaint Map</h3>
+      <div id="map"></div>
+    </section>
+
+  </main>
+
+  <script>
+    // Chart.js
+    new Chart(document.getElementById('areaChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Sector 1', 'Sector 2', 'Sector 3', 'Sector 4'],
+        datasets: [{
+          label: 'Complaints',
+          data: [45, 25, 30, 50],
+          backgroundColor: '#4caf50'
+        }]
+      }
+    });
+
+    new Chart(document.getElementById('categoryChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Water', 'Road', 'Electricity', 'Waste'],
+        datasets: [{
+          data: [120, 90, 60, 30],
+          backgroundColor: ['#4a90e2', '#3b7dc4', '#336699', '#2a587d']
+        }]
+      }
+    });
+
+    // Leaflet Map
+    var map = L.map('map').setView([20.5937, 78.9629], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    L.marker([28.6139, 77.2090]).addTo(map).bindPopup('Complaint #1001<br>Road Issue');
+    L.marker([19.0760, 72.8777]).addTo(map).bindPopup('Complaint #1002<br>Water Supply');
+  </script>
+</body>
+</html>

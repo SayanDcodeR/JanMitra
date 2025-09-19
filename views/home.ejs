@@ -36,25 +36,25 @@
                         <div class="row">
                             <div class="col-md-3 col-6">
                                 <div class="stat-item" onclick="showIssues('raised')">
-                                    <span class="stat-number" id="raisedCount">142</span>
+                                    <span class="stat-number" id="raisedCount"><%= totalIssues %></span>
                                     <div class="stat-label">Issues Raised</div>
                                 </div>
                             </div>
                             <div class="col-md-3 col-6">
                                 <div class="stat-item" onclick="showIssues('resolved')">
-                                    <span class="stat-number" id="resolvedCount">87</span>
+                                    <span class="stat-number" id="resolvedCount"><%= resolvedIssues %></span>
                                     <div class="stat-label">Issues Resolved</div>
                                 </div>
                             </div>
                             <div class="col-md-3 col-6">
                                 <div class="stat-item" onclick="showIssues('pending')">
-                                    <span class="stat-number" id="pendingCount">55</span>
+                                    <span class="stat-number" id="pendingCount"><%=pendingIssues %></span>
                                     <div class="stat-label">Issues Pending</div>
                                 </div>
                             </div>
                             <div class="col-md-3 col-6">
                                 <div class="stat-item">
-                                    <span class="stat-number" id="activeUsers">1,247</span>
+                                    <span class="stat-number" id="activeUsers"><%= activeCitizens %></span>
                                     <div class="stat-label">Active Citizens</div>
                                 </div>
                             </div>

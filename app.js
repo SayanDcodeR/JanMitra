@@ -61,9 +61,13 @@ app.use((req,res,next)=>{
   next();
 });
 
-app.get("/home", (req, res) => {
+app.get("/home", async(req, res) => {
   // res.render("layouts/boilerplate.ejs");
-  res.render("home.ejs");
+  const totalIssues= await Issue.countDocuments();
+  const pendingIssues=await Issue.countDocuments({status:"pending"});
+  const resolvedIssues=await Issue.countDocuments({status:"resolved"});
+  const activeCitizens=await User.countDocuments({role:"citizen"});
+  res.render("home.ejs",{totalIssues,pendingIssues,resolvedIssues,activeCitizens});
 });
 app.get("/report",saveRedirectUrl, isLoggedIn, (req, res) => {
   res.render("report.ejs");
@@ -120,6 +124,9 @@ app.get("/login", (req, res) => {
   res.render("login.ejs");
 });
 app.post("/login", saveRedirectUrl, passport.authenticate("local", { failureRedirect: "/login", failureFlash: true }),(req, res) => {
+  if(req.user.role=="admin"){
+    return res.redirect("/admin");
+  }
   const redirectUrl = res.locals.redirectUrl || "/home";
   res.redirect(redirectUrl);
 });
@@ -134,6 +141,9 @@ app.get("/logout",(req,res)=>{
 });
 app.get("/profile",(req,res)=>{
   res.render("profile.ejs");
+});
+app.get("/admin",(req,res)=>{
+  res.render("admindash.ejs");
 })
 app.listen("8000", () => {
   console.log("Server connected");
