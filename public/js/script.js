@@ -1,5 +1,4 @@
-
-// Interactive functionality for the civic issue platform
+const { resolve } = require("path");
 
 function showReportForm() {
     const reportModal = new bootstrap.Modal(document.getElementById('reportModal'));
@@ -32,14 +31,76 @@ function voteIssue(issueId, event) {
         event.target.style.color = '';
     }, 1000);
 }
+async function forwardGeocode(address) {
+    try {
+        const response = await geocodingClient.forwardGeocode({
+            query: address,
+            limit: 5,
+            language: ['en'] // Optional: specify language
+        }).send();
 
-function searchLocation() {
+        if (response && response.body && response.body.features.length > 0) {
+            const features = response.body.features;
+            return features.map(feature => ({
+                formatted_address: feature.place_name,
+                coordinates: {
+                    lng: feature.center[0],
+                    lat: feature.center[1]
+                },
+                place_type: feature.place_type,
+                relevance: feature.relevance,
+                context: feature.context || [] // Additional location info
+            }));
+        } else {
+            throw new Error('No results found');
+        }
+    } catch (error) {
+        console.error('Mapbox forward geocoding error:', error);
+        throw error;
+    }
+}
+
+async function searchLocation() {
     const location = document.getElementById('locationInput').value;
+    console.log(location);
     if (location) {
         alert(`Searching for issues near: ${location}`);
         // Simulate loading new issues based on location
+        //     async function searchNearbyIssues(address, radius = 5) {
+        // try {
+        // Show loading
+        // document.getElementById('loading').style.display = 'block';
+        // document.getElementById('results').innerHTML = '';
+
+        const response = await fetch('/search-nearby-issues', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                address: location,
+                // radius: 5
+            })
+        });
+        console.log(response[0].json());
+        // console.log(Array.isArray(data));  // true
+        // console.log(data.length);          // number of issues
+
+        // data.forEach(issue => {
+        //     console.log("ID:", issue.id);
+        //     console.log("Title:", issue.title);
+        //     console.log("Location:", issue.location);
+        // });
+
+        // console.log(data.issues[0]['_id']);
+
+        // }catch(e){
+        //     console.log(e);
+        // }
     }
 }
+
+
 
 function getUserLocation() {
     if (navigator.geolocation) {

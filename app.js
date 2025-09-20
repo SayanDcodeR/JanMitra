@@ -4,8 +4,8 @@ if (process.env.NODE_ENV != "production") {
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-// const MONGO_URL = "mongodb://127.0.0.1:27017/communityOne";
-const dbUrl=process.env.ATLASDB_URL;
+const MONGO_URL = "mongodb://127.0.0.1:27017/communityOne";
+// const dbUrl=process.env.ATLASDB_URL;
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -20,6 +20,8 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 const { isLoggedIn, saveRedirectUrl, isAdmin } = require("./middleware.js");
 const upload = multer({ storage })
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const geocodingClient = mbxGeocoding({ accessToken: process.env.MAP_TOKEN });
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -46,7 +48,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 async function main() {
-  await mongoose.connect(dbUrl);
+  await mongoose.connect(MONGO_URL);
 }
 main()
   .then(() => {
@@ -182,7 +184,160 @@ app.get("/search-issues", async (req, res) => {
 });
 app.get("/test",(req,res)=>{
   res.render("search.ejs");
-})
+});
+async function forwardGeocode(address) {
+    try {
+        const response = await geocodingClient.forwardGeocode({
+            query: address,
+            limit: 5,
+            language: ['en'] // Optional: specify language
+        }).send();
+
+        if (response && response.body && response.body.features.length > 0) {
+            const features = response.body.features;
+            return features.map(feature => ({
+                formatted_address: feature.place_name,
+                coordinates: {
+                    lng: feature.center[0],
+                    lat: feature.center[1]
+                },
+                place_type: feature.place_type,
+                relevance: feature.relevance,
+                context: feature.context || [] // Additional location info
+            }));
+        } else {
+            throw new Error('No results found');
+        }
+    } catch (error) {
+        console.error('Mapbox forward geocoding error:', error);
+        throw error;
+    }
+}
+
+// Your route remains the same
+app.post('/forward-geocode', async (req, res) => {
+    try {
+        const { address } = req.body;
+        
+        if (!address || address.trim() === '') {
+            return res.status(400).json({ error: 'Address is required' });
+        }
+
+        const results = await forwardGeocode(address);
+        res.json({ results });
+    } catch (error) {
+        console.error('Geocoding failed:', error);
+        res.status(500).json({ error: 'Geocoding failed' });
+    }
+});
+app.post('/search-issues-by-location', async (req, res) => {
+    try {
+        const { address, radius = 5 } = req.body; // radius in kilometers
+        
+        if (!address || address.trim() === '') {
+            return res.status(400).json({ error: 'Address is required' });
+        }
+
+        // First, get coordinates from the address
+        const geocodeResults = await forwardGeocode(address);
+        
+        if (!geocodeResults || geocodeResults.length === 0) {
+            return res.json({ issues: [], message: 'Location not found' });
+        }
+
+        // Use the most relevant result (first one)
+        const primaryLocation = geocodeResults[0];
+        const { lat, lng } = primaryLocation.coordinates;
+
+        // Search for issues within the specified radius
+        const issues = await Issue.find({
+            'location.lat': {
+                $gte: lat - (radius / 111), // Approximate: 1 degree ≈ 111 km
+                $lte: lat + (radius / 111)
+            },
+            'location.long': {
+                $gte: lng - (radius / (111 * Math.cos(lat * Math.PI / 180))),
+                $lte: lng + (radius / (111 * Math.cos(lat * Math.PI / 180)))
+            }
+        })
+        .populate('user', 'username')
+        .sort({ createdAt: -1 })
+        .limit(50);
+
+        res.json({
+            issues,
+            searchLocation: primaryLocation,
+            totalFound: issues.length,
+            searchRadius: radius
+        });
+
+    } catch (error) {
+        console.error('Location search error:', error);
+        res.status(500).json({ error: 'Search failed' });
+    }
+});
+app.post('/search-nearby-issues', async (req, res) => {
+    // try {
+        const { address, radius = 5 } = req.body; // radius in kilometers
+        
+        if (!address || address.trim() === '') {
+            return res.status(400).json({ error: 'Address is required' });
+        }
+
+        // Get coordinates from the input address using Mapbox
+        const geocodeResults = await forwardGeocode(address);
+        
+        if (!geocodeResults || geocodeResults.length === 0) {
+            return res.json({ issues: [], message: 'Location not found' });
+        }
+
+        const searchLocation = geocodeResults[0];
+        const searchLat = searchLocation.coordinates.lat;
+        const searchLng = searchLocation.coordinates.lng;
+
+        // Find issues within the radius using latitude/longitude bounds
+        const latRadius = radius / 111; // 1 degree ≈ 111 km
+        const lngRadius = radius / (111 * Math.cos(searchLat * Math.PI / 180)); // Adjust for longitude
+
+        const issues = await Issue.find({
+            'location.lat': {
+                $gte: searchLat - latRadius,
+                $lte: searchLat + latRadius
+            },
+            'location.long': {
+                $gte: searchLng - lngRadius,
+                $lte: searchLng + lngRadius
+            }
+        })
+        .populate('user', 'username')
+        .sort({ createdAt: -1 });
+      console.log(issues);
+
+        // Calculate actual distances and filter more precisely
+    //     const issuesWithDistance = issues
+    //         .map(issue => {
+    //             const distance = calculateDistance(
+    //                 searchLat, searchLng,
+    //                 issue.location.lat, issue.location.long
+    //             );
+    //             return { ...issue.toObject(), distance };
+    //         })
+    //         .filter(issue => issue.distance <= radius)
+    //         .sort((a, b) => a.distance - b.distance);
+
+    //     res.json({
+    //         issues: issuesWithDistance,
+    //         searchLocation: searchLocation,
+    //         totalFound: issuesWithDistance.length,
+    //         searchRadius: radius
+    //     });
+
+    // } catch (error) {
+    //     console.error('Proximity search error:', error);
+    //     res.status(500).json({ error: 'Search failed' });
+    // }
+});
+
 
 app.listen("8000", () => {
   console.log("Server connected");
