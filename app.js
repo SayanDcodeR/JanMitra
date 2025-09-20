@@ -114,6 +114,10 @@ app.post("/signup", async (req, res) => {
         if (err) {
             return next(err);
         }
+        if(newUser.role==='admin'){
+
+          return res.redirect("/admin");
+        }
         // req.flash("success", "Welcome to WanderLust");
         res.redirect("/home");
     });
@@ -182,8 +186,17 @@ app.get("/search-issues", async (req, res) => {
     });
   }
 });
-app.get("/test",(req,res)=>{
-  res.render("search.ejs");
+app.get("/issues/:id",async(req,res)=>{
+  const {id}=req.params;
+   const issue = await Issue.findById(id).populate("user");
+   if (!issue) {
+    req.flash("error", "Listing does not exist!");
+    // res.redirect("/listings");
+    res.send("error");
+    return;
+  }
+
+  res.render("issue-details.ejs",{issue});
 });
 async function forwardGeocode(address) {
     try {

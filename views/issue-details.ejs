@@ -1,25 +1,27 @@
 <% layout("/layouts/boilerplate") %>
-<style>
+  <style>
     .detail-issue-container {
       max-width: 600px;
       margin: auto;
       background: #fff;
       padding: 25px 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .detail-issue-container h1 {
       font-size: 24px;
       margin-bottom: 20px;
-      color: #2E7D32; /* green highlight */
+      color: #2E7D32;
+      /* green highlight */
     }
 
     .issue-detail {
       margin: 10px 0;
       font-size: 16px;
       padding: 10px;
-      border-left: 4px solid #388E3C; /* accent */
+      border-left: 4px solid #388E3C;
+      /* accent */
       background: #f9fafb;
       border-radius: 6px;
     }
@@ -45,17 +47,33 @@
     .back-btn:hover {
       background: #1b5e20;
     }
-</style>
-<body>
-<div class="detail-issue-container">
-    <a href="/issues" class="back-btn"><i class="fa-solid fa-arrow-left"></i>Back to Issues</a>
-    <h1><%= issue.title %></h1>
-    
-    <p class="issue-detail"><strong>ID:</strong> <%= issue.id %></p>
-    <p class="issue-detail"><strong>Location:</strong> <%= issue.location %></p>
-    <p class="issue-detail"><strong>Status:</strong> <%= issue.status %></p>
-    <p class="issue-detail"><strong>Priority:</strong> <%= issue.priority %></p>
-    <p class="issue-detail"><strong>Reported By:</strong> <%= issue.reportedBy %></p>
-    <p class="issue-detail"><strong>Date:</strong> <%= issue.date %></p>
-  </div>
-</body>
+  </style>
+
+  <body>
+    <div class="detail-issue-container">
+      <a href="/issues" class="back-btn"><i class="fa-solid fa-arrow-left"></i>Back to Issues</a>
+      <h1>
+        <%= issue.title %>
+      </h1>
+      <img src="<%=issue.image.url%>" alt="" height="200px" class=" mb-3">
+
+      <p class="issue-detail"><strong>ID:</strong>
+        <%= issue.description %>
+      </p>
+      <p class="issue-detail"><strong>Location:</strong>
+        <%= issue.address %>
+      </p>
+      <p class="issue-detail"><strong>Status:</strong>
+        <%= issue.status %>
+      </p>
+      <p class="issue-detail"><strong>Priority:</strong>
+        <%= issue.priority %>
+      </p>
+      <p class="issue-detail"><strong>Reported By:</strong>
+        <%= issue.user.username %>
+      </p>
+      <p class="issue-detail"><strong>Date:</strong>
+        <%= issue.createdAt %>
+      </p>
+    </div>
+  </body>
