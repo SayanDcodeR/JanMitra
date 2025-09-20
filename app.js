@@ -1,6 +1,8 @@
 if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
 }
+const Comment = require("./models/comment");
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -78,10 +80,85 @@ app.get("/report",saveRedirectUrl, isLoggedIn, (req, res) => {
 app.get("/about", (req, res) => {
   res.render("about.ejs");
 });
-app.get("/issues",async (req, res) => {
+app.post("/issues/:id/comments", isLoggedIn, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { content } = req.body;
+
+    if (!content || content.trim() === '') {
+      req.flash("error", "Comment cannot be empty!");
+      return res.redirect(`/issues/${id}`);
+    }
+
+    // Check if issue exists
+    const issue = await Issue.findById(id);
+    if (!issue) {
+      req.flash("error", "Issue not found!");
+      return res.redirect("/issues");
+    }
+
+    // Create new comment
+    const newComment = new Comment({
+      content: content.trim(),
+      user: req.user._id,
+      issue: id
+    });
+
+    await newComment.save();
+    req.flash("success", "Comment added successfully!");
+    res.redirect(`/issues/${id}`);
+
+  } catch (error) {
+    console.error("Error adding comment:", error);
+    req.flash("error", "Failed to add comment!");
+    res.redirect(`/issues/${req.params.id}`);
+  }
+});
+
+// Delete a comment (only by comment author or admin)
+app.delete("/issues/:issueId/comments/:commentId", isLoggedIn, async (req, res) => {
+  try {
+    const { issueId, commentId } = req.params;
+    
+    const comment = await Comment.findById(commentId);
+    if (!comment) {
+      req.flash("error", "Comment not found!");
+      return res.redirect(`/issues/${issueId}`);
+    }
+
+    // Check if user is the author of the comment or an admin
+    if (!comment.user.equals(req.user._id) && req.user.role !== 'admin') {
+      req.flash("error", "You don't have permission to delete this comment!");
+      return res.redirect(`/issues/${issueId}`);
+    }
+
+    await Comment.findByIdAndDelete(commentId);
+    req.flash("success", "Comment deleted successfully!");
+    res.redirect(`/issues/${issueId}`);
+
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+    req.flash("error", "Failed to delete comment!");
+    res.redirect(`/issues/${req.params.issueId}`);
+  }
+});
+
+// Get comments count for an issue (API endpoint)
+app.get("/api/issues/:id/comments-count", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const count = await Comment.countDocuments({ issue: id });
+    res.json({ success: true, count });
+  } catch (error) {
+    res.status(500).json({ success: false, error: "Failed to get comments count" });
+  }
+});
+app.get("/issues", async (req, res) => {
   const allIssues = await Issue.find({}).populate("user");
-  // console.log(allIssues);
-  res.render("issues.ejs", { allIssues });
+  res.render("issues.ejs", { 
+    allIssues,
+    mapboxToken: process.env.MAP_TOKEN
+  });
 });
 app.post("/report",saveRedirectUrl,isLoggedIn, upload.single('issue[image]'), async (req, res) => {
   // console.log(req.body.issue);
@@ -186,18 +263,76 @@ app.get("/search-issues", async (req, res) => {
     });
   }
 });
-app.get("/issues/:id",async(req,res)=>{
-  const {id}=req.params;
-   const issue = await Issue.findById(id).populate("user");
-   if (!issue) {
-    req.flash("error", "Listing does not exist!");
-    // res.redirect("/listings");
-    res.send("error");
-    return;
-  }
+app.get("/issues-map-data", async (req, res) => {
+  try {
+    const issues = await Issue.find({})
+      .populate("user", "username")
+      .select('title description category priority status location address createdAt _id image');
+    
+    // Filter out issues without location data
+    const issuesWithLocation = issues.filter(issue => 
+      issue.location && 
+      issue.location.lat && 
+      issue.location.long &&
+      !isNaN(issue.location.lat) && 
+      !isNaN(issue.location.long)
+    );
 
-  res.render("issue-details.ejs",{issue});
+    // Format data for map markers
+    const mapData = issuesWithLocation.map(issue => ({
+      id: issue._id,
+      title: issue.title,
+      description: issue.description,
+      category: issue.category,
+      priority: issue.priority,
+      status: issue.status,
+      address: issue.address,
+      coordinates: [issue.location.long, issue.location.lat], // Mapbox uses [lng, lat]
+      createdAt: issue.createdAt,
+      reportedBy: issue.user ? issue.user.username : 'Unknown',
+      imageUrl: issue.image ? issue.image.url : null
+    }));
+
+    res.json({
+      success: true,
+      issues: mapData,
+      total: mapData.length
+    });
+
+  } catch (error) {
+    console.error("Error fetching map data:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error fetching map data"
+    });
+  }
 });
+app.get("/issues/:id", async(req, res) => {
+  const { id } = req.params;
+  try {
+    const issue = await Issue.findById(id).populate("user");
+    if (!issue) {
+      req.flash("error", "Issue does not exist!");
+      return res.redirect("/issues");
+    }
+
+    // Get comments for this issue
+    // const comments = await Comment.find({ issue: id })
+    //   .populate("user", "username")
+    //   .sort({ createdAt: -1 }); // Most recent first
+
+    res.render("issue-details.ejs", { 
+      issue,
+      // comments,
+      mapboxToken: process.env.MAP_TOKEN
+    });
+  } catch (error) {
+    console.error("Error fetching issue details:", error);
+    req.flash("error", "Something went wrong!");
+    res.redirect("/issues");
+  }
+});
+
 async function forwardGeocode(address) {
     try {
         const response = await geocodingClient.forwardGeocode({

@@ -1,12 +1,24 @@
 <% layout("/layouts/boilerplate") %>
 
-    <div class="content">
+<div class="content">
+    <!-- Page Heading -->
+    <header class="page-header">
+        <h1>Civic Issues Dashboard</h1>
+        <p>Track, prioritize, and resolve community problems.</p>
+    </header>
 
-        <!-- Page Heading -->
-        <header class="page-header">
-            <h1>Civic Issues Dashboard</h1>
-            <p>Track, prioritize, and resolve community problems.</p>
-        </header>
+    <!-- View Toggle Buttons -->
+    <div class="view-toggle" style="margin-bottom: 20px;">
+        <button id="gridViewBtn" class="view-btn active">
+            <i class="fas fa-th-large"></i> Grid View
+        </button>
+        <button id="mapViewBtn" class="view-btn">
+            <i class="fas fa-map-marker-alt"></i> Map View
+        </button>
+    </div>
+
+    <!-- Grid View Container -->
+    <div id="gridView">
         <!-- Filter Section -->
         <section class="filters">
             <input type="text" class="search-bar" placeholder="Search issues by title, description, or location..." />
@@ -51,302 +63,348 @@
 
         <!-- Issues Grid -->
         <section class="issues-grid">
-            <!-- <div class="issue-card" data-id="ISSUE-001">
-        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
-        <div class="issue-content">
-            <div class="issue-meta">
-            <span class="status pending">Pending</span>
-            <span class="priority high">High</span>
-            <span class="issue-date">15 Sep 2025</span>
-            </div>
-
-            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
-
-            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
-            <p><strong>Issue ID:</strong> ISSUE-001</p>
-            <p><strong>Reported by:</strong> Anushka Sharma</p>
-            <div class="issue-actions">
-                <div class="action">
-                    <i class="fas fa-thumbs-up"></i> <span>12</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-thumbs-down"></i> <span>2</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-comment"></i> <span>5</span>
-                </div>
-            </div>
-            <button class="issue-view-details">View Details</button>
-        </div>
-    </div>
-
-    <div class="issue-card" data-id="ISSUE-002">
-        <img src="../images/pothole.jpeg" alt="Issue Image" class="issue-image" />
-        <div class="issue-content">
-            <div class="issue-meta">
-            <span class="status progress">In Process</span>
-            <span class="priority medium">Medium</span>
-            <span class="issue-date">20 Aug 2025</span>
-            </div>
-
-            <h3 class="issue-title">Pothole near MG Road Bus Stop</h3>
-
-            <p><strong>Location:</strong> MG Road, Delhi</p>
-            <p><strong>Issue ID:</strong> ISSUE-002</p>
-            <p><strong>Reported by:</strong> Sayan Singha</p>
-            <div class="issue-actions">
-                <div class="action">
-                    <i class="fas fa-thumbs-up"></i> <span>6</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-thumbs-down"></i> <span>0</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-comment"></i> <span>0</span>
-                </div>
-            </div>
-            <button class="issue-view-details">View Details</button>
-        </div>
-    </div>
-
-    <div class="issue-card" data-id="ISSUE-003">
-        <img src="../images/waterlog.jpeg" alt="Issue Image" class="issue-image" />
-        <div class="issue-content">
-            <div class="issue-meta">
-            <span class="status resolved">Resolved</span>
-            <span class="priority high">High</span>
-            <span class="issue-date">20 Aug 2025</span>
-            </div>
-
-            <h3 class="issue-title">Waterlogging after Heavy Rainfall</h3>
-
-            <p><strong>Location:</strong> MG Road, Delhi</p>
-            <p><strong>Issue ID:</strong> ISSUE-003</p>
-            <p><strong>Reported by:</strong> Ayan Dutta</p>
-            <div class="issue-actions">
-                <div class="action">
-                    <i class="fas fa-thumbs-up"></i> <span>6</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-thumbs-down"></i> <span>0</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-comment"></i> <span>0</span>
-                </div>
-            </div>
-            <button class="issue-view-details">View Details</button>
-        </div>
-    </div>
-    <div class="issue-card" data-id="ISSUE-001">
-        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
-        <div class="issue-content">
-            <div class="issue-meta">
-            <span class="status pending">Pending</span>
-            <span class="priority high">High</span>
-            <span class="issue-date">15 Sep 2025</span>
-            </div>
-
-            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
-
-            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
-            <p><strong>Issue ID:</strong> ISSUE-001</p>
-            <p><strong>Reported by:</strong> Anushka Sharma</p>
-            <div class="issue-actions">
-                <div class="action">
-                    <i class="fas fa-thumbs-up"></i> <span>12</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-thumbs-down"></i> <span>2</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-comment"></i> <span>5</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="issue-card" data-id="ISSUE-001">
-        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
-        <div class="issue-content">
-            <div class="issue-meta">
-            <span class="status pending">Pending</span>
-            <span class="priority high">High</span>
-            <span class="issue-date">15 Sep 2025</span>
-            </div>
-
-            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
-
-            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
-            <p><strong>Issue ID:</strong> ISSUE-001</p>
-            <p><strong>Reported by:</strong> Anushka Sharma</p>
-            <div class="issue-actions">
-                <div class="action">
-                    <i class="fas fa-thumbs-up"></i> <span>12</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-thumbs-down"></i> <span>2</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-comment"></i> <span>5</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="issue-card" data-id="ISSUE-001">
-        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
-        <div class="issue-content">
-            <div class="issue-meta">
-            <span class="status pending">Pending</span>
-            <span class="priority high">High</span>
-            <span class="issue-date">15 Sep 2025</span>
-            </div>
-
-            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
-
-            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
-            <p><strong>Issue ID:</strong> ISSUE-001</p>
-            <p><strong>Reported by:</strong> Anushka Sharma</p>
-            <div class="issue-actions">
-                <div class="action">
-                    <i class="fas fa-thumbs-up"></i> <span>12</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-thumbs-down"></i> <span>2</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-comment"></i> <span>5</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="issue-card" data-id="ISSUE-001">
-        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
-        <div class="issue-content">
-            <div class="issue-meta">
-            <span class="status pending">Pending</span>
-            <span class="priority high">High</span>
-            <span class="issue-date">15 Sep 2025</span>
-            </div>
-
-            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
-
-            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
-            <p><strong>Issue ID:</strong> ISSUE-001</p>
-            <p><strong>Reported by:</strong> Anushka Sharma</p>
-            <div class="issue-actions">
-                <div class="action">
-                    <i class="fas fa-thumbs-up"></i> <span>12</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-thumbs-down"></i> <span>2</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-comment"></i> <span>5</span>
-                </div>
-            </div>
-
-        </div>
-    </div> -->
             <% for(const issue of allIssues){ %>
                 <a href="/issues/<%= issue._id %>" style="text-decoration: none;">
-                <div class="issue-card" data-id="ISSUE-001">
+                <div class="issue-card" data-id="<%= issue._id %>">
                     <img src="<%= issue.image.url %>" alt="Issue Image" class="issue-image" />
                     <div class="issue-content">
                         <div class="issue-meta">
-                            <span class="status pending">Pending</span>
-                            <span class="priority high">
-                                <%= issue.priority %>
+                            <span class="status <%= issue.status %>"><%= issue.status %></span>
+                            <span class="priority <%= issue.priority ? issue.priority.toLowerCase() : 'medium' %>">
+                                <%= issue.priority || 'Medium' %>
                             </span>
-                            <span class="issue-date">15 Sep 2025</span>
+                            <span class="issue-date"><%= new Date(issue.createdAt).toLocaleDateString() %></span>
                         </div>
 
-                        <h3 class="issue-title">
-                            <%= issue.title %>
-                        </h3>
+                        <h3 class="issue-title"><%= issue.title %></h3>
 
-                        <p><strong>Location:</strong>
-                            <%= issue.address %>
-                        </p>
-                        <p><strong>Issue ID:</strong>
-                            <%= issue._id %>
-                        </p>
+                        <p><strong>Location:</strong> <%= issue.address %></p>
+                        <p><strong>Issue ID:</strong> <%= issue._id %></p>
                         <% if(issue.user){ %>
-                            <p><strong>Reported by:</strong>
-                                <%= issue.user.username %>
-                            </p>
-                            <% } %>
-                                <div class="issue-actions">
-                                    <div class="action">
-                                        <i class="fas fa-thumbs-up"></i> <span>12</span>
-                                    </div>
-                                    <div class="action">
-                                        <i class="fas fa-thumbs-down"></i> <span>2</span>
-                                    </div>
-                                    <div class="action">
-                                        <i class="fas fa-comment"></i> <span>5</span>
-                                    </div>
-                                </div>
-
+                            <p><strong>Reported by:</strong> <%= issue.user.username %></p>
+                        <% } %>
+                        <div class="issue-actions">
+                            <div class="action">
+                                <i class="fas fa-thumbs-up"></i> <span>12</span>
+                            </div>
+                            <div class="action">
+                                <i class="fas fa-thumbs-down"></i> <span>2</span>
+                            </div>
+                            <div class="action">
+                                <i class="fas fa-comment"></i> <span>5</span>
+                            </div>
+                        </div>
                     </div>
-                </div></a>
-                <% } %>
-                    <!-- <div class="issue-card" data-id="ISSUE-001">
-        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
-        <div class="issue-content">
-            <div class="issue-meta">
-            <span class="status pending">Pending</span>
-            <span class="priority high">High</span>
-            <span class="issue-date">15 Sep 2025</span>
-            </div>
-
-            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
-
-            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
-            <p><strong>Issue ID:</strong> ISSUE-001</p>
-            <p><strong>Reported by:</strong> Anushka Sharma</p>
-            <div class="issue-actions">
-                <div class="action">
-                    <i class="fas fa-thumbs-up"></i> <span>12</span>
                 </div>
-                <div class="action">
-                    <i class="fas fa-thumbs-down"></i> <span>2</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-comment"></i> <span>5</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="issue-card">
-        <img src="../images/garbage.jpeg" alt="Issue Image" class="issue-image" />
-        <div class="issue-content">
-            <div class="issue-meta">
-            <span class="status pending">Pending</span>
-            <span class="priority high">High</span>
-            <span class="issue-date">15 Sep 2025</span>
-            </div>
-
-            <h3 class="issue-title">Garbage Overflow near Sector 14</h3>
-
-            <p><strong>Location:</strong> Sector 14, Gurgaon</p>
-            <p><strong>Issue ID:</strong> ISSUE-001</p>
-            <p><strong>Reported by:</strong> Anushka Sharma</p>
-            <div class="issue-actions">
-                <div class="action">
-                    <i class="fas fa-thumbs-up"></i> <span>12</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-thumbs-down"></i> <span>2</span>
-                </div>
-                <div class="action">
-                    <i class="fas fa-comment"></i> <span>5</span>
-                </div>
-            </div> 
-
-        </div>
-    </div>-->
+                </a>
+            <% } %>
         </section>
     </div>
+
+    <!-- Map View Container -->
+    <div id="mapView" style="display: none;">
+        <div class="map-container">
+            <div id="issuesMap" style="height: 600px; width: 100%; border-radius: 8px;"></div>
+            <div class="map-legend">
+                <h4>Legend</h4>
+                <div class="legend-item">
+                    <span class="legend-marker high-priority"></span>
+                    <span>High Priority</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-marker medium-priority"></span>
+                    <span>Medium Priority</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-marker low-priority"></span>
+                    <span>Low Priority</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mapbox CSS and JS -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+
+<style>
+.view-toggle {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.view-btn {
+    padding: 12px 24px;
+    border: 2px solid #007bff;
+    background: white;
+    color: #007bff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.view-btn:hover {
+    background: #f8f9fa;
+    transform: translateY(-1px);
+}
+
+.view-btn.active {
+    background: #007bff;
+    color: white;
+}
+
+.view-btn i {
+    font-size: 16px;
+}
+
+.map-container {
+    position: relative;
+    margin: 20px 0;
+}
+
+.map-legend {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    min-width: 150px;
+}
+
+.map-legend h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.legend-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-marker.high-priority {
+    background-color: #dc3545;
+}
+
+.legend-marker.medium-priority {
+    background-color: #ffc107;
+}
+
+.legend-marker.low-priority {
+    background-color: #28a745;
+}
+
+/* Remove custom popup styles as we're using simpler approach */
+.mapboxgl-popup-content {
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 300px;
+}
+
+.popup-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 14px;
+}
+
+.popup-info {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.popup-view-btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.popup-view-btn:hover {
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+}
+</style>
+
+<script>
+let map;
+let markersLayer = [];
+
+// Initialize map when map view is first opened
+function initializeMap() {
+    if (map) return; // Already initialized
+    
+    mapboxgl.accessToken = '<%= mapboxToken %>';
+    
+    map = new mapboxgl.Map({
+        container: 'issuesMap',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [77.2090, 28.6139], // Default to Delhi, India
+        zoom: 10
+    });
+
+    map.addControl(new mapboxgl.NavigationControl());
+    
+    map.on('load', function() {
+        loadIssuesOnMap();
+    });
+}
+
+// Load issues data and display on map
+async function loadIssuesOnMap() {
+    try {
+        const response = await fetch('/issues-map-data');
+        const data = await response.json();
+        
+        if (data.success && data.issues.length > 0) {
+            displayIssuesOnMap(data.issues);
+            
+            // Fit map to show all markers
+            const bounds = new mapboxgl.LngLatBounds();
+            data.issues.forEach(issue => {
+                bounds.extend(issue.coordinates);
+            });
+            
+            if (data.issues.length > 1) {
+                map.fitBounds(bounds, { padding: 50 });
+            } else {
+                map.setCenter(data.issues[0].coordinates);
+                map.setZoom(14);
+            }
+        } else {
+            console.log('No issues with location data found');
+        }
+    } catch (error) {
+        console.error('Error loading map data:', error);
+    }
+}
+
+// Display issues as markers on map
+function displayIssuesOnMap(issues) {
+    // Clear existing markers
+    markersLayer.forEach(marker => marker.remove());
+    markersLayer = [];
+    
+    issues.forEach(issue => {
+        // Create marker color based on priority
+        let markerColor = '#28a745'; // Default green for low priority
+        
+        if (issue.priority === 'high') {
+            markerColor = '#dc3545'; // Red for high priority
+        } else if (issue.priority === 'medium') {
+            markerColor = '#ffc107'; // Yellow for medium priority
+        }
+        
+        // Create popup content
+        const popupContent = `
+            <div class="popup-content">
+                <div class="popup-title">${issue.title}</div>
+                <div class="popup-info"><strong>Address:</strong> ${issue.address || 'Not specified'}</div>
+                <div class="popup-info"><strong>Category:</strong> ${issue.category || 'Not specified'}</div>
+                <div class="popup-info"><strong>Priority:</strong> ${issue.priority || 'Medium'}</div>
+                <div class="popup-info"><strong>Status:</strong> ${issue.status}</div>
+                <div class="popup-info"><strong>Reported by:</strong> ${issue.reportedBy}</div>
+                <div class="popup-info"><strong>Date:</strong> ${new Date(issue.createdAt).toLocaleDateString()}</div>
+                ${issue.description ? `<div class="popup-info" style="margin-top: 8px;"><strong>Description:</strong> ${issue.description.substring(0, 100)}${issue.description.length > 100 ? '...' : ''}</div>` : ''}
+                <div style="margin-top: 10px;">
+                    <a href="/issues/${issue.id}" class="popup-view-btn">View Details</a>
+                </div>
+            </div>
+        `;
+        
+        // Create popup
+        const popup = new mapboxgl.Popup({
+            offset: 25,
+            closeButton: true,
+            closeOnClick: false
+        }).setHTML(popupContent);
+        
+        // Create standard Mapbox marker with priority-based color
+        const marker = new mapboxgl.Marker({ 
+            color: markerColor,
+            scale: 1.2
+        })
+            .setLngLat(issue.coordinates)
+            .setPopup(popup)
+            .addTo(map);
+        
+        // Add click event to marker for direct navigation
+        marker.getElement().addEventListener('click', function(e) {
+            // Prevent popup from opening
+            e.stopPropagation();
+            // Navigate to issue details
+            window.location.href = `/issues/${issue.id}`;
+        });
+        
+        // Optional: Add hover effect to show popup
+        marker.getElement().addEventListener('mouseenter', function() {
+            popup.addTo(map);
+        });
+        
+        marker.getElement().addEventListener('mouseleave', function() {
+            popup.remove();
+        });
+        
+        markersLayer.push(marker);
+    });
+}
+
+// View toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const gridViewBtn = document.getElementById('gridViewBtn');
+    const mapViewBtn = document.getElementById('mapViewBtn');
+    const gridView = document.getElementById('gridView');
+    const mapView = document.getElementById('mapView');
+    
+    gridViewBtn.addEventListener('click', function() {
+        gridViewBtn.classList.add('active');
+        mapViewBtn.classList.remove('active');
+        gridView.style.display = 'block';
+        mapView.style.display = 'none';
+    });
+    
+    mapViewBtn.addEventListener('click', function() {
+        mapViewBtn.classList.add('active');
+        gridViewBtn.classList.remove('active');
+        gridView.style.display = 'none';
+        mapView.style.display = 'block';
+        
+        // Initialize map if not already done
+        setTimeout(() => {
+            initializeMap();
+            if (map) {
+                map.resize(); // Ensure map renders properly
+            }
+        }, 100);
+    });
+});
+</script>
