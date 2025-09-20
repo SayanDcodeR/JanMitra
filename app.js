@@ -17,9 +17,6 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 
-
-
-
 app.post('/upload', (req, res) => {
   // req.files contains array of uploaded files
   console.log(req.files);
@@ -47,6 +44,25 @@ app.get("/profile", (req, res) => {
 app.get("/issues",(req,res)=>{
   res.render("issues.ejs");
 })
+// app.js
+app.get("/issue-details", (req, res) => {
+    const issueId = req.query.id;  // e.g., ISSUE-002
+
+    // For now, send dummy data
+    res.render("issue-details", {
+        issue: {
+            id: issueId,
+            title: "Demo Issue",
+            location: "Demo Location",
+            status: "In Process",
+            priority: "Medium",
+            reportedBy: "Demo User",
+            date: "20 Sep 2025"
+        }
+    });
+});
+
+
 // app.get("/issues",(req,res)=>{
 //   res.
 // })

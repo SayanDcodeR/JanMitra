@@ -1,0 +1,61 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    .detail-issue-container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .detail-issue-container h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #2E7D32; /* green highlight */
+    }
+
+    .issue-detail {
+      margin: 10px 0;
+      font-size: 16px;
+      padding: 10px;
+      border-left: 4px solid #388E3C; /* accent */
+      background: #f9fafb;
+      border-radius: 6px;
+    }
+
+    .issue-detail strong {
+      display: inline-block;
+      width: 120px;
+      color: #1565C0;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 16px;
+      background: #2E7D32;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: #1b5e20;
+    }
+</style>
+<body>
+<div class="detail-issue-container">
+    <a href="/issues" class="back-btn"><i class="fa-solid fa-arrow-left"></i>Back to Issues</a>
+    <h1><%= issue.title %></h1>
+    
+    <p class="issue-detail"><strong>ID:</strong> <%= issue.id %></p>
+    <p class="issue-detail"><strong>Location:</strong> <%= issue.location %></p>
+    <p class="issue-detail"><strong>Status:</strong> <%= issue.status %></p>
+    <p class="issue-detail"><strong>Priority:</strong> <%= issue.priority %></p>
+    <p class="issue-detail"><strong>Reported By:</strong> <%= issue.reportedBy %></p>
+    <p class="issue-detail"><strong>Date:</strong> <%= issue.date %></p>
+  </div>
+</body>

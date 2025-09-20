@@ -230,3 +230,19 @@
 .issue-actions i {
   font-size: 16px;
 }
+.issue-view-details{
+  font-size: 0.9rem;
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+    background-color: var(--primary-green);
+    border: none;
+    display: block;
+    margin: 1rem auto 0 auto;
+}
+.issue-view-details:hover{
+  background-color: var(--dark-green);
+}
