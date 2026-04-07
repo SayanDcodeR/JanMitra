@@ -66,7 +66,7 @@ app.use((req,res,next)=>{
   next();
 });
 
-app.get("/home", async(req, res) => {
+app.get("/", async(req, res) => {
   // res.render("layouts/boilerplate.ejs");
   const totalIssues= await Issue.countDocuments();
   const pendingIssues=await Issue.countDocuments({status:"pending"});
@@ -196,7 +196,7 @@ app.post("/signup", async (req, res) => {
           return res.redirect("/admin");
         }
         // req.flash("success", "Welcome to WanderLust");
-        res.redirect("/home");
+        res.redirect("/");
     });
   } catch (e) {
     // req.flash("error", e.message);
@@ -211,7 +211,7 @@ app.post("/login", saveRedirectUrl, passport.authenticate("local", { failureRedi
   if(req.user.role=="admin"){
     return res.redirect("/admin");
   }
-  const redirectUrl = res.locals.redirectUrl || "/home";
+  const redirectUrl = res.locals.redirectUrl || "/";
   res.redirect(redirectUrl);
 });
 app.get("/logout",(req,res)=>{
@@ -220,7 +220,7 @@ app.get("/logout",(req,res)=>{
             return next(err);
         }
         // req.flash("success", "You are logged out!");
-        res.redirect("/home");
+        res.redirect("/");
     })
 });
 app.get("/profile",(req,res)=>{
