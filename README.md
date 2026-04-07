@@ -1,2 +1,2 @@
-# SIHReportSystem
-Civic lssue Reporting and Resolution System
+# JanMitra
+Civic Issue Reporting and Resolution Platform
