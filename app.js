@@ -6,8 +6,8 @@ const Comment = require("./models/comment");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const MONGO_URL = "mongodb://127.0.0.1:27017/communityOne";
-// const dbUrl=process.env.ATLASDB_URL;
+// const MONGO_URL = "mongodb://127.0.0.1:27017/communityOne";
+const dbUrl=process.env.ATLASDB_URL;
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -50,7 +50,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 main()
   .then(() => {
